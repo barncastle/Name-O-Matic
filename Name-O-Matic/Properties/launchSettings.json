@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Name-O-Matic": {
+      "commandName": "Project",
+      "commandLineArgs": "--path \"D:\\World of Warcraft Public Test\" --prod \"wow_beta\" --diff \"7efc2c742883571a3dee8bba8a72426d\""
+    }
+  }
+}
