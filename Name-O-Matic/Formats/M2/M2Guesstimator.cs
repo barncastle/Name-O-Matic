@@ -148,9 +148,21 @@ namespace NameOMatic.Formats.M2
                 }
             }
 
+            // fallback for number prefixed models
+            if(parts.Length == 1 && char.IsDigit(parts[0][0]))
+            {
+                foreach(var map in PrefixMap)
+                {
+                    if(model.InternalName.StartsWith(map.Key, StringComparison.OrdinalIgnoreCase))
+                    {
+                        model.Directory = map.Value;
+                        return true;
+                    }
+                }
+            }
+
             return false;
         }
-
 
         private HashSet<int> CreateLookup(string database, string key)
         {

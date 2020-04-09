@@ -13,7 +13,7 @@ namespace NameOMatic.Database.Storage
 
     class CASCLibWrapper : IStorage
     {
-        public string Build => Handler.Config.BuildName;
+        public string Build => Handler.Config.VersionName;
         public string FormattedBuild { get; }
         public Expansion Expansion { get; }
         public string RootEKey { get; }

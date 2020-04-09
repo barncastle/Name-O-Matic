@@ -107,6 +107,7 @@
 8wsg;world/generic/pvp/warsonggulch/
 8xp;world/expansion07/doodads/
 8zul;world/expansion07/doodads/zuldazarzone/
+8riv;world/expansion07/doodads/riverzone/
 arrow;item/objectcomponents/ammo/
 arrowacidflight;item/objectcomponents/ammo/
 arrowfireflight;item/objectcomponents/ammo/
@@ -183,3 +184,19 @@ fogvolume;eironments/fogvolumes/
 8bl;world/expansion07/doodads/blackempire/
 8nzo;world/expansion07/doodads/nzothraid/
 ICECROWN_LAVAMAN;world/expansion02/doodads/icecrown/lava/
+9xp;world/expansion08/doodads/
+9ard;world/expansion08/doodads/ardenweald/
+9pln;world/expansion08/doodads/babylonzone/
+9bo;world/expansion08/doodads/broker/
+9cas;world/expansion08/doodads/castlezone/
+9du;world/expansion08/doodads/dungeon/
+9fa;world/expansion08/doodads/fairy/
+9fx;world/expansion08/doodads/fx/
+9mal;world/expansion08/doodads/maldraxxus/
+9maw;world/expansion08/doodads/maw/
+9mw;world/expansion08/doodads/maw/
+9nc;world/expansion08/doodads/necro/
+9ob;world/expansion08/doodads/oribos/
+9vl;world/expansion08/doodads/valkyr/
+9vm;world/expansion08/doodads/vampire/
+cape_special;item/objectcomponents/cape/
