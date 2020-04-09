@@ -30,11 +30,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CascLib" Version="1.0.10" />
-    <PackageReference Include="CommandLineParser" Version="2.6.0" />
+    <PackageReference Include="CommandLineParser" Version="2.7.82" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CascLib\CascLib\CascLib.csproj" />
     <ProjectReference Include="..\DBCD\DBCD\DBCD.csproj" />
     <ProjectReference Include="..\TACT.Net\TACT.Net\TACT.Net.csproj" />
   </ItemGroup>

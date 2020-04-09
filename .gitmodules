@@ -4,3 +4,6 @@
 [submodule "TACT.Net"]
 	path = TACT.Net
 	url = https://github.com/wowdev/TACT.Net.git
+[submodule "CascLib"]
+	path = CascLib
+	url = https://github.com/WoW-Tools/CascLib.git
