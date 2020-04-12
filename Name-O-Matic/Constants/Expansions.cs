@@ -14,7 +14,7 @@
         Shadowlands
     }
 
-    enum ExpansionExt
+    enum ExpansionFull
     {
         Alpha,
         Vanilla,

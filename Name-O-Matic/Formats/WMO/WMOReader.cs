@@ -4,11 +4,14 @@ using System.Runtime.CompilerServices;
 using NameOMatic.Constants;
 using NameOMatic.Database;
 using NameOMatic.Extensions;
+using NameOMatic.Helpers.Collections;
 
 namespace NameOMatic.Formats.WMO
 {
     class WMOReader : IReader<WMOModel>
     {
+        public UniqueLookup<string, int> Tokens { get; } = new UniqueLookup<string, int>();
+
         public bool TryRead(int fileID, out WMOModel model)
         {
             if (!FileContext.Instance.FileExists(fileID))
@@ -30,6 +33,10 @@ namespace NameOMatic.Formats.WMO
                 model = ParseMOHD(reader, fileID);
                 model.GroupFileDataId = ReadArray<int>(IffToken.GFID, chunkReader, reader);
                 model.Materials = ReadArray<MOMT>(IffToken.MOMT, chunkReader, reader);
+
+                foreach (var chunk in chunkReader.GetNewTokens())
+                    Tokens.Add(chunk, fileID);
+
                 return true;
             }
         }

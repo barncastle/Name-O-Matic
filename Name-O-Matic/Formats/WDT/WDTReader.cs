@@ -4,11 +4,14 @@ using System.Runtime.CompilerServices;
 using NameOMatic.Constants;
 using NameOMatic.Database;
 using NameOMatic.Extensions;
+using NameOMatic.Helpers.Collections;
 
 namespace NameOMatic.Formats.WDT
 {
     class WDTReader : IReader<WDTModel>
     {
+        public UniqueLookup<string, int> Tokens { get; } = new UniqueLookup<string, int>();
+
         public bool TryRead(int fileID, out WDTModel model)
         {
             if (!FileContext.Instance.FileExists(fileID))
@@ -26,6 +29,10 @@ namespace NameOMatic.Formats.WDT
                     Header = Read<MPHD>(IffToken.MPHD, chunkReader, reader),
                     MapIDs = ReadArray<MAID>(IffToken.MAID, chunkReader, reader)
                 };
+
+                foreach (var chunk in chunkReader.GetNewTokens(true))
+                    Tokens.Add(chunk, fileID);
+
                 return true;
             }
         }

@@ -1,12 +1,16 @@
-﻿using System.IO;
+﻿using System.Collections.Concurrent;
+using System.IO;
 using NameOMatic.Constants;
 using NameOMatic.Database;
 using NameOMatic.Extensions;
+using NameOMatic.Helpers.Collections;
 
 namespace NameOMatic.Formats.ADTDAT
 {
     class ADTDATReader : IReader<ADTDATModel>
     {
+        public UniqueLookup<string, int> Tokens { get; } = new UniqueLookup<string, int>();
+
         public bool TryRead(int fileID, out ADTDATModel model)
         {
             if (!FileContext.Instance.FileExists(fileID) || ListFile.Instance.ContainsKey(fileID))
@@ -33,6 +37,9 @@ namespace NameOMatic.Formats.ADTDAT
                     reader.BaseStream.Position = chunk.Offset;
                     model.Headers[i++] = reader.Read<ACNKHeader>();
                 }
+
+                foreach (var chunk in chunkReader.GetNewTokens())
+                    Tokens.Add(chunk, fileID);
 
                 return true;
             }

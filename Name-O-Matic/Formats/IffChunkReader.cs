@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NameOMatic.Constants;
+using NameOMatic.Extensions;
 
 namespace NameOMatic.Formats
 {
@@ -40,6 +42,15 @@ namespace NameOMatic.Formats
 
             _reader.BaseStream.Position = chunk.Offset;
             return true;
+        }
+
+        public IEnumerable<string> GetNewTokens(bool reverse = false)
+        {
+            return _chunks
+                .Select(x => x.Key)
+                .Distinct()
+                .Where(x => !Enum.IsDefined(typeof(IffToken), x))
+                .Select(x => x.ToToken(reverse));
         }
 
 

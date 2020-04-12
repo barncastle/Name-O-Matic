@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using NameOMatic.Constants;
 using NameOMatic.Database;
 using NameOMatic.Extensions;
 using NameOMatic.Helpers.Collections;
@@ -10,7 +11,10 @@ namespace NameOMatic.Formats.WDT
 {
     class WDTEnumerator : IFileNamer
     {
+        public string Format { get; } = "WDT";
+        public bool Enabled { get; } = true;
         public FileNameLookup FileNames { get; private set; }
+        public UniqueLookup<string, int> Tokens { get; }
 
         private readonly DiffEnumerator DiffEnumerator;
         private readonly WDTReader Reader;
@@ -20,6 +24,7 @@ namespace NameOMatic.Formats.WDT
             DiffEnumerator = diff;
             Reader = new WDTReader();
             FileNames = new FileNameLookup();
+            Tokens = new UniqueLookup<string, int>();
         }
 
         public FileNameLookup Enumerate()
@@ -38,6 +43,7 @@ namespace NameOMatic.Formats.WDT
                     model.Directory = directory;
                     model.GenerateFileNames();
                     FileNames.AddRange(model.FileNames);
+                    Tokens.Merge(Reader.Tokens);
                 }
             });
 
@@ -48,6 +54,7 @@ namespace NameOMatic.Formats.WDT
                 {
                     model.GenerateFileNames();
                     FileNames.AddRange(model.FileNames);
+                    Tokens.Merge(Reader.Tokens);
                 }
             });
 

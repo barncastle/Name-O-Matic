@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text;
+using NameOMatic.Constants;
 
 namespace NameOMatic.Extensions
 {
@@ -12,6 +14,23 @@ namespace NameOMatic.Extensions
             Console.SetCursorPosition(left ?? CursorLeft, top ?? CursorTop);
             Console.WriteLine($"Started {format} enumeration... completed in {sw.Elapsed}");
             Console.SetCursorPosition(CursorLeft, CursorTop);
+        }
+
+        public static string ToToken(this IffToken token, bool reverse = false)
+        {
+            var val = (int)token;
+            var chars = new[]
+            {
+                (char)(byte)(val >> 24),
+                (char)(byte)(val >> 16),
+                (char)(byte)(val >> 8),
+                (char)(byte)(val >> 0)
+            };
+
+            if (reverse)
+                Array.Reverse(chars);
+
+            return new string(chars);
         }
     }
 }

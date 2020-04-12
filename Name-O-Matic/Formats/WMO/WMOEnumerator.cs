@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using NameOMatic.Constants;
 using NameOMatic.Extensions;
 using NameOMatic.Helpers.Collections;
 using NameOMatic.Helpers.WoWTools;
@@ -10,7 +11,10 @@ namespace NameOMatic.Formats.WMO
 {
     class WMOEnumerator : IFileNamer
     {
+        public string Format { get; } = "WMO";
+        public bool Enabled { get; } = true;
         public FileNameLookup FileNames { get; private set; }
+        public UniqueLookup<string, int> Tokens { get; }
 
         private readonly DiffEnumerator DiffEnumerator;
         private readonly FileEnumerator FileEnumerator;
@@ -24,6 +28,7 @@ namespace NameOMatic.Formats.WMO
             Reader = new WMOReader();
             BLPGuesstimator = new BLP.BLPGuesstimator();
             FileNames = new FileNameLookup();
+            Tokens = new UniqueLookup<string, int>();
         }
 
         public FileNameLookup Enumerate()
@@ -41,6 +46,7 @@ namespace NameOMatic.Formats.WMO
                     model.GenerateFileNames();
                     model.GenerateTextures(BLPGuesstimator);
                     FileNames.AddRange(model.FileNames);
+                    Tokens.Merge(Reader.Tokens);
                 }
             });
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using NameOMatic.Constants;
 using NameOMatic.Database;
 using NameOMatic.Extensions;
 using NameOMatic.Helpers.Collections;
@@ -8,13 +9,17 @@ namespace NameOMatic.Formats.BLP
 {
     class BLPEnumerator : IFileNamer
     {
+        public string Format { get; } = "BLP";
+        public bool Enabled { get; } = false;
         public FileNameLookup FileNames { get; }
+        public UniqueLookup<string, int> Tokens { get; }
 
         private readonly BLPGuesstimator BLPGuesstimator;
 
         public BLPEnumerator()
         {
             FileNames = new FileNameLookup();
+            Tokens = new UniqueLookup<string, int>();
             BLPGuesstimator = new BLPGuesstimator();
         }
 

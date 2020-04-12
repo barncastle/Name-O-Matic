@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using NameOMatic.Constants;
 using NameOMatic.Extensions;
 using NameOMatic.Helpers.Collections;
 using NameOMatic.Helpers.WoWTools;
@@ -10,7 +11,10 @@ namespace NameOMatic.Formats.ADTDAT
 {
     class ADTDATEnumerator : IFileNamer
     {
+        public string Format { get; } = "ADTDAT";
+        public bool Enabled { get; } = true;
         public FileNameLookup FileNames { get; }
+        public UniqueLookup<string, int> Tokens { get; }
 
         private readonly DiffEnumerator DiffEnumerator;
         private readonly FileEnumerator Enumerator;
@@ -19,6 +23,7 @@ namespace NameOMatic.Formats.ADTDAT
         public ADTDATEnumerator(DiffEnumerator diff)
         {
             FileNames = new FileNameLookup();
+            Tokens = new UniqueLookup<string, int>();
 
             DiffEnumerator = diff;
             Enumerator = new FileEnumerator("unnamed", "type:adtdat");
@@ -39,6 +44,7 @@ namespace NameOMatic.Formats.ADTDAT
                 {
                     model.GenerateFileNames();
                     FileNames.AddRange(model.FileNames);
+                    Tokens.Merge(Reader.Tokens);
                 }
             });
 

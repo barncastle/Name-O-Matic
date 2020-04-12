@@ -5,11 +5,14 @@ using NameOMatic.Constants;
 using NameOMatic.Database;
 using NameOMatic.Extensions;
 using NameOMatic.Helpers;
+using NameOMatic.Helpers.Collections;
 
 namespace NameOMatic.Formats.M2
 {
     class SkelReader : Singleton<SkelReader>, IReader<SkelModel>
     {
+        public UniqueLookup<string, int> Tokens { get; } = new UniqueLookup<string, int>();
+
         public bool TryRead(int fileID, out SkelModel model)
         {
             if (!FileContext.Instance.FileExists(fileID))
@@ -28,6 +31,9 @@ namespace NameOMatic.Formats.M2
                     AnimFiles = ReadArray<AnimInfo>(IffToken.AFID, chunkReader, reader),
                     BoneFileIds = ReadArray<int>(IffToken.BFID, chunkReader, reader)
                 };
+
+                foreach (var chunk in chunkReader.GetNewTokens(true))
+                    Tokens.Add(chunk, fileID);
 
                 return true;
             }

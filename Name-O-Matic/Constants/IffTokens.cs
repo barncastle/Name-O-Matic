@@ -23,6 +23,10 @@
         WFV1 = 0x31564657,
         WFV2 = 0x32564657,
         PGD1 = 0x31444750,
+        WFV3 = 0x33564657,
+        PFDC = 0x43444650,
+        EDGF = 0x46474445,
+        NERF = 0x4652454E,
         // Skel
         SKL1 = 0x314C4B53,
         SKA1 = 0x31414B53,
@@ -58,6 +62,12 @@
         MCVP = 0x4D435650,
         GFID = 0x47464944,
         MDDI = 0x4D444449,
+        MPVD = 0x4D505644,
+        MAVD = 0x4D415644,
+        MBVD = 0x4D425644,
+        MFED = 0x4D464544,
+        MGI2 = 0x4D474932,
+        MNLD = 0x4D4E4C44,
         MOGP = 0x4D4F4750,
         MOPY = 0x4D4F5059,
         MOVI = 0x4D4F5649,
@@ -94,6 +104,9 @@
         MPBP = 0x4D504250,
         MPBI = 0x4D504249,
         MPBG = 0x4D504247,
+        MDDL = 0x4D44444C,
+        MAVR = 0x4D415652,
+        MNLR = 0x4D4E4C52,
         // ADT v18
         MHDR = 0x4D484452,
         MCIN = 0x4D43494E,
@@ -176,5 +189,6 @@
         PVPD = 0x50565044,
         PVMI = 0x50564D49,
         PVBD = 0x50564244,
+        MNAM = 0x4D414E4D,
     }
 }

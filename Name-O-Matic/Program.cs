@@ -8,6 +8,11 @@ using NameOMatic.Formats.WDT;
 using NameOMatic.Formats.WMO;
 using NameOMatic.Helpers.Collections;
 using NameOMatic.Helpers.WoWTools;
+using NameOMatic.Constants;
+using NameOMatic.Formats;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Linq;
 
 namespace NameOMatic
 {
@@ -31,23 +36,45 @@ namespace NameOMatic
 
             // start work
             var lookup = new FileNameLookup();
-            if(options.IsValidFormat("ADTDAT"))
-                lookup.Merge(new ADTDATEnumerator(diff).Enumerate());
-            if(options.IsValidFormat("DB2"))
-                lookup.Merge(new DB2Enumerator().Enumerate());
-            if (options.IsValidFormat("M2"))
-                lookup.Merge(new M2Enumerator(diff).Enumerate());
-            if (options.IsValidFormat("WDT"))
-                lookup.Merge(new WDTEnumerator(diff).Enumerate());
-            if (options.IsValidFormat("WMO"))
-                lookup.Merge(new WMOEnumerator(diff).Enumerate());
+            var tokens = new UniqueLookup<string, int>();
+
+            foreach (var fileNamer in GetFileNamers(diff, options))
+            {
+                lookup.Merge(fileNamer.Enumerate());
+                tokens.Merge(fileNamer.Tokens);
+            }
 
             // special case guaranteed to be correct           
             lookup.ReplaceRange(ManifestInterfaceData.Enumerate());
 
             // export
             lookup.Export($"filenames_{FileContext.Instance.Build}_{DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")}.txt");
+            tokens.Export("Output", $"tokens_{FileContext.Instance.Build}_{DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")}.txt");
             Console.WriteLine($"Generated {lookup.Count} filenames");
+            Console.WriteLine($"Found {tokens.Count} new tokens");
+            Console.ReadLine();
+        }
+
+        static IEnumerable<IFileNamer> GetFileNamers(DiffEnumerator diff, Options options)
+        {
+            var defaultParams = new Type[] { typeof(DiffEnumerator) };
+            var results = new SortedList<string, IFileNamer>(0x10);
+            var assembly = Assembly.GetEntryAssembly();
+
+            foreach (var ti in assembly.DefinedTypes)
+            {
+                if (ti.ImplementedInterfaces.Contains(typeof(IFileNamer)))
+                {
+                    var constructor = ti.GetConstructor(defaultParams)?.Invoke(new object[] { diff });
+                    constructor ??= ti.GetConstructor(Type.EmptyTypes).Invoke(null);
+                    var filenamer = (IFileNamer)constructor;
+
+                    if (filenamer.Enabled && options.IsValidFormat(filenamer.Format))
+                        results.Add(ti.Name, (IFileNamer)constructor);
+                }
+            }
+
+            return results.Values;
         }
     }
 }

@@ -6,15 +6,14 @@ using NameOMatic.Constants;
 using NameOMatic.Database;
 using NameOMatic.Extensions;
 using NameOMatic.Helpers;
+using NameOMatic.Helpers.Collections;
 
 namespace NameOMatic.Formats.M2
 {
     class M2Reader : Singleton<M2Reader>, IReader<M2Model>
     {
-        public M2Guesstimator DirectoryAnalyser { get; }
-
-        public M2Reader() => DirectoryAnalyser = new M2Guesstimator();
-
+        public M2Guesstimator DirectoryAnalyser { get; } = new M2Guesstimator();
+        public UniqueLookup<string, int> Tokens { get; } = new UniqueLookup<string, int>();
 
         public bool TryRead(int fileID, out M2Model model)
         {
@@ -48,6 +47,9 @@ namespace NameOMatic.Formats.M2
 
                 if (!ListFile.Instance.ContainsKey(fileID))
                     DirectoryAnalyser.Analyse(model);
+
+                foreach (var chunk in chunkReader.GetNewTokens(true))
+                    Tokens.Add(chunk, fileID);
 
                 return true;
             }

@@ -26,7 +26,7 @@ namespace NameOMatic.Formats.DB2
             var zoneMusic = DBContext.Instance["ZoneMusic"];
             var listfile = ListFile.Instance;
 
-            var expansion = (ExpansionExt)FileContext.Instance.Expansion;
+            var expansion = (ExpansionFull)FileContext.Instance.Expansion;
 
             foreach (var rec in zoneMusic)
             {

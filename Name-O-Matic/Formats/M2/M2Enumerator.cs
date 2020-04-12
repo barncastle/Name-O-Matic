@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using NameOMatic.Constants;
 using NameOMatic.Database;
 using NameOMatic.Extensions;
 using NameOMatic.Helpers.Collections;
@@ -12,7 +13,10 @@ namespace NameOMatic.Formats.M2
 {
     class M2Enumerator : IFileNamer
     {
+        public string Format { get; } = "M2";
+        public bool Enabled { get; } = true;
         public FileNameLookup FileNames { get; private set; }
+        public UniqueLookup<string, int> Tokens { get; }
 
         private readonly DiffEnumerator DiffEnumerator;
         private readonly FileEnumerator Enumerator;
@@ -28,6 +32,7 @@ namespace NameOMatic.Formats.M2
             SkelReader = new SkelReader();
             BLPGuesstimator = new BLP.BLPGuesstimator();
             FileNames = new FileNameLookup();
+            Tokens = new UniqueLookup<string, int>();
         }
 
         public FileNameLookup Enumerate()
@@ -50,6 +55,7 @@ namespace NameOMatic.Formats.M2
                     model.GenerateTextures(BLPGuesstimator);
                     FileNames.AddRange(model.FileNames);
                     FileNames.AddRange(ReadSkel(model));
+                    Tokens.Merge(M2Reader.Tokens);
                 }
             });
 
@@ -64,6 +70,7 @@ namespace NameOMatic.Formats.M2
                         skel.FileName = filename;
                         skel.GenerateFileNames();
                         FileNames.AddRange(skel.FileNames);
+                        Tokens.Merge(SkelReader.Tokens);
                     }
                 }
             });

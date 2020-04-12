@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace NameOMatic.Helpers.Collections
@@ -18,7 +20,6 @@ namespace NameOMatic.Helpers.Collections
 
 
         public int Count => _dictionary.Count(x => x.Value.Count() == 1);
-
 
         public void Add(TKey key, TValue value)
         {
@@ -46,7 +47,7 @@ namespace NameOMatic.Helpers.Collections
 
         public void Merge(UniqueLookup<TKey, TValue> other)
         {
-            var items = other.SelectMany(x => x.Select(v => new KeyValuePair<TKey, TValue>(x.Key, v)));
+            var items = other?.SelectMany(x => x.Select(v => new KeyValuePair<TKey, TValue>(x.Key, v)));
             AddRange(items);
         }
 
@@ -65,6 +66,21 @@ namespace NameOMatic.Helpers.Collections
         }
 
         public IDictionary<TKey, TValue> ToDictionary() => this.ToDictionary(x => x.Key, x => x.First());
+
+        public void Export(string directory, string filename, Func<TValue, string> valueFormatter = null)
+        {
+            if (!this.Any())
+                return;
+
+            Directory.CreateDirectory(directory);
+
+            using var fs = File.CreateText(Path.Combine("Output", filename));
+            foreach (var entry in this.OrderBy(x => x.Key))
+            {
+                var value = valueFormatter != null ? valueFormatter.Invoke(entry.First()) : entry.First().ToString();
+                fs.WriteLine(entry.Key + ";" + value);
+            }                
+        }
 
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumeratorInternal();

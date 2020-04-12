@@ -142,7 +142,7 @@ namespace NameOMatic.Formats.DB2
             var partypose = DBContext.Instance["UiPartyPose"];
             var map = DBContext.Instance["Map"]?.ToDictionary(x => x.Key, x => x.Value.Field<string>("Directory"));
             var build = FileContext.Instance.FormattedBuild;
-            var expansion = (ExpansionExt)FileContext.Instance.Expansion;
+            var expansion = (ExpansionFull)FileContext.Instance.Expansion;
 
             if (partypose == null || map == null)
                 return;
@@ -162,7 +162,7 @@ namespace NameOMatic.Formats.DB2
         {
             var introMusic = DBContext.Instance["ZoneIntroMusicTable"];
             var build = FileContext.Instance.FormattedBuild;
-            var expansion = (ExpansionExt)FileContext.Instance.Expansion;
+            var expansion = (ExpansionFull)FileContext.Instance.Expansion;
 
             if (introMusic == null)
                 return;

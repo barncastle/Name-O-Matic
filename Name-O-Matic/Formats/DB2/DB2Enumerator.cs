@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using NameOMatic.Constants;
 using NameOMatic.Extensions;
 using NameOMatic.Helpers.Collections;
 
@@ -9,9 +10,16 @@ namespace NameOMatic.Formats.DB2
 {
     class DB2Enumerator : IFileNamer
     {
+        public string Format { get; } = "DB2";
+        public bool Enabled { get; } = false;
         public FileNameLookup FileNames { get; private set; }
+        public UniqueLookup<string, int> Tokens { get; }
 
-        public DB2Enumerator() => FileNames = new FileNameLookup();
+        public DB2Enumerator()
+        {
+            FileNames = new FileNameLookup();
+            Tokens = new UniqueLookup<string, int>();
+        }
 
         public FileNameLookup Enumerate()
         {
