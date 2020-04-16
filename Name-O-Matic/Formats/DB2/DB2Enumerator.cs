@@ -11,7 +11,7 @@ namespace NameOMatic.Formats.DB2
     class DB2Enumerator : IFileNamer
     {
         public string Format { get; } = "DB2";
-        public bool Enabled { get; } = false;
+        public bool Enabled { get; } = true;
         public FileNameLookup FileNames { get; private set; }
         public UniqueLookup<string, int> Tokens { get; }
 
