@@ -10,8 +10,12 @@ namespace NameOMatic.Extensions
         public static void StopAndLog(this Stopwatch sw, string format, int left, int top)
         {
             sw.Stop();
+
+            Console.WriteLine();
+            var (CursorLeft, CursorTop) = (Console.CursorLeft, Console.CursorTop);
             Console.SetCursorPosition(left, top);
             Console.WriteLine($"Started {format} enumeration... completed in {sw.Elapsed}");
+            Console.SetCursorPosition(CursorLeft, CursorTop);
         }
 
         public static string ToToken(this IffToken token, bool reverse = false)
