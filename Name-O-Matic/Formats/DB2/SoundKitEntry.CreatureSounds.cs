@@ -18,7 +18,7 @@ namespace NameOMatic.Formats.DB2
             var displayinfo = DBContext.Instance["CreatureDisplayInfo"];
             var modelData = DBContext.Instance["CreatureModelData"];
             var listfile = ListFile.Instance;
-            var unmappable = new List<int>(0x1000);
+            var unmappable = new HashSet<int>(0x1000);
 
             GetCreatureNameLookup();
             CreatureSoundTypes = GetCreatureSoundLookup();
