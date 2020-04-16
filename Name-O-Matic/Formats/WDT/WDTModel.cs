@@ -30,6 +30,8 @@ namespace NameOMatic.Formats.WDT
             string map = Directory;
             var listfile = ListFile.Instance;
 
+            if (!listfile.ContainsKey(FileDataId))
+                FileNames[FileDataId] = name + ".wdt";
             if (!listfile.ContainsKey(Header.LgtFile))
                 FileNames[Header.LgtFile] = name + "_lgt.wdt";
             if (!listfile.ContainsKey(Header.OccFile))
@@ -44,9 +46,6 @@ namespace NameOMatic.Formats.WDT
                 FileNames[Header.WdlFile] = name + ".wdl";
             if (!listfile.ContainsKey(Header.PD4File))
                 FileNames[Header.PD4File] = name + ".pd4";
-
-            if (FileDataId == 3182457)
-                Console.WriteLine();
 
             int i, j;
             for (int m = 0; m < MapIDs.Length; m++)

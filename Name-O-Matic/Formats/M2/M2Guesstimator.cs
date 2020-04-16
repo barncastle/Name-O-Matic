@@ -77,7 +77,9 @@ namespace NameOMatic.Formats.M2
 
         private bool IsSky(M2Model model)
         {
-            if (SkyboxIDs.Contains(model.FileDataId) || CelestialSkyboxIDs.Contains(model.FileDataId))
+            if (SkyboxIDs.Contains(model.FileDataId) || 
+                CelestialSkyboxIDs.Contains(model.FileDataId) ||
+                model.InternalName.EndsWith("sky01", StringComparison.OrdinalIgnoreCase))
             {
                 model.Directory = "environments/stars/";
                 return true;

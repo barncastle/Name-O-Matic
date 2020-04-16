@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using NameOMatic.Constants;
+using NameOMatic.Database;
 using NameOMatic.Extensions;
 using NameOMatic.Helpers.Collections;
 using NameOMatic.Helpers.WoWTools;
@@ -36,6 +37,9 @@ namespace NameOMatic.Formats.WMO
             Stopwatch sw = Stopwatch.StartNew();
             var (CursorLeft, CursorTop) = (Console.CursorLeft, Console.CursorTop);
             Console.Write("Started WMO enumeration... ");
+
+            // preload database
+            DBContext.Instance.TryLoad("AreaTable", out _);
 
             DiffEnumerator.FileType = "wmo";
 

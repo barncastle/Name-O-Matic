@@ -63,6 +63,7 @@
         GFID = 0x47464944,
         MDDI = 0x4D444449,
         MPVD = 0x4D505644,
+        MAVG = 0x4D415647,
         MAVD = 0x4D415644,
         MBVD = 0x4D425644,
         MFED = 0x4D464544,
