@@ -30,6 +30,9 @@ namespace NameOMatic.Formats.BLP
             // formatting
             basepath = basepath.TrimEnd(Seperators);
 
+            if (basepath[^1] == '/')
+                return null;
+
             var matches = _cascontext.GetMatchingFiles(fileId).Where(x => IsApplicable(x));
             if (!matches.Any())
                 return $"{basepath}_{fileId}.blp";
@@ -70,8 +73,8 @@ namespace NameOMatic.Formats.BLP
         private string FormatName(string filename, string basepath)
         {
             var parts = filename.Split('/');
-            var fileName = parts[parts.Length - 1];
-            var directoryName = parts[parts.Length - 2];
+            var fileName = parts[^1];
+            var directoryName = parts[^2];
 
             // strip model name prefix if it exists
             if (fileName.StartsWith(directoryName))

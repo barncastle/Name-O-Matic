@@ -54,7 +54,8 @@ namespace NameOMatic.Formats.DB2
                 ParseNPCSounds(rec.Value.FieldAs<int>("NPCSoundID"), basepath);      // CreatureDisplayInfo.NPCSoundID
             }
 
-            Console.WriteLine($"\t\tNote: {unmappable.Count} CreatureDisplayIds were NOT mapped");
+            if (unmappable.Count > 0)
+                Console.WriteLine($"\t\tNote: {unmappable.Count} CreatureDisplayIds were NOT mapped");
         }
 
         #region Creature Sound Helpers

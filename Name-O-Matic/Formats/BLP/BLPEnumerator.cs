@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using NameOMatic.Constants;
 using NameOMatic.Database;
@@ -10,7 +11,7 @@ namespace NameOMatic.Formats.BLP
     class BLPEnumerator : IFileNamer
     {
         public string Format { get; } = "BLP";
-        public bool Enabled { get; } = false;
+        public bool Enabled { get; } = true;
         public FileNameLookup FileNames { get; }
         public UniqueLookup<string, int> Tokens { get; }
 
@@ -31,17 +32,29 @@ namespace NameOMatic.Formats.BLP
 
             foreach (var file in ListFile.Instance)
             {
+                if (!IsValid(file.Value))
+                    continue;
+
                 var match = BLPGuesstimator.FileIdSuffix.Match(file.Value);
                 if (match.Success)
                 {
-                    var filename = BLPGuesstimator.Guess(file.Key, file.Value.Substring(0, file.Value.Length - 11));
-                    if (filename != file.Value)
+                    var filename = BLPGuesstimator.Guess(file.Key, file.Value[0..^11]);
+                    if (!string.IsNullOrEmpty(filename) && filename != file.Value)
                         FileNames.Add(file.Key, filename);
                 }
             }
 
             sw.StopAndLog("BLP", CursorLeft, CursorTop);
             return FileNames;
+        }
+
+        private bool IsValid(string filename)
+        {
+            if (filename.Contains("bakednpctextures", StringComparison.OrdinalIgnoreCase))
+                return false;
+            if (filename.StartsWith("world/wmo/", StringComparison.OrdinalIgnoreCase))
+                return false;
+            return true;
         }
     }
 }
