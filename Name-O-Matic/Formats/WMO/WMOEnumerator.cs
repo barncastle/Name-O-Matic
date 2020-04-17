@@ -48,7 +48,7 @@ namespace NameOMatic.Formats.WMO
                 if (Reader.TryRead(fileId, out var model))
                 {
                     model.GenerateFileNames();
-                    model.GenerateTextures(BLPGuesstimator);
+                    model.GenerateTextures();
                     FileNames.AddRange(model.FileNames);
                     Tokens.Merge(Reader.Tokens);
                 }

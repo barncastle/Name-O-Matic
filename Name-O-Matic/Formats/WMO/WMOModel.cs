@@ -31,11 +31,10 @@ namespace NameOMatic.Formats.WMO
             if (!listfile.ContainsKey(FileDataId))
                 FileNames[FileDataId] = name + ".wmo";
 
-            int group = 0, lod = 0;
             for (int i = 0; i < GroupFileDataId.Length; i++)
             {
-                group = i % NGroups;
-                lod = (i / NGroups) - 1;
+                int group = i % NGroups;
+                int lod = (i / NGroups) - 1;
 
                 if (listfile.ContainsKey(GroupFileDataId[i]))
                     continue;
@@ -47,7 +46,7 @@ namespace NameOMatic.Formats.WMO
             }
         }
 
-        public void GenerateTextures(BLP.BLPGuesstimator blpGuesstimator)
+        public void GenerateTextures()
         {
             string name = ToString();
 

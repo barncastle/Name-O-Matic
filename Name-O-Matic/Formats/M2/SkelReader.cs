@@ -21,22 +21,20 @@ namespace NameOMatic.Formats.M2
                 return false;
             }
 
-            using (var stream = FileContext.Instance.OpenFile(fileID))
-            using (var reader = new BinaryReader(stream))
+            using var stream = FileContext.Instance.OpenFile(fileID);
+            using var reader = new BinaryReader(stream);
+            var chunkReader = new IffChunkReader(reader);
+
+            model = new SkelModel(fileID)
             {
-                var chunkReader = new IffChunkReader(reader);
+                AnimFiles = ReadArray<AnimInfo>(IffToken.AFID, chunkReader, reader),
+                BoneFileIds = ReadArray<int>(IffToken.BFID, chunkReader, reader)
+            };
 
-                model = new SkelModel(fileID)
-                {
-                    AnimFiles = ReadArray<AnimInfo>(IffToken.AFID, chunkReader, reader),
-                    BoneFileIds = ReadArray<int>(IffToken.BFID, chunkReader, reader)
-                };
+            foreach (var chunk in chunkReader.GetNewTokens(true))
+                Tokens.Add(chunk, fileID);
 
-                foreach (var chunk in chunkReader.GetNewTokens(true))
-                    Tokens.Add(chunk, fileID);
-
-                return true;
-            }
+            return true;
         }
 
         private T[] ReadArray<T>(IffToken token, IffChunkReader chunkReader, BinaryReader reader) where T : struct

@@ -78,52 +78,52 @@ namespace NameOMatic.Formats.DB2
             {
                 case Constants.CharSection.Skin:
                 case Constants.CharSection.HDSkin:
-                    switch (material)
+                    return material switch
                     {
-                        case 0: return "skin{0}" + suffix; // character/tauren/male/taurenmaleskin00_22.blp
-                        case 1: return "skin{0}_extra" + suffix; // character/tauren/male/taurenmaleskin00_06_extra.blp
-                        default: return "";
-                    }
+                        0 => "skin{0}" + suffix,// character/tauren/male/taurenmaleskin00_22.blp
+                        1 => "skin{0}_extra" + suffix,// character/tauren/male/taurenmaleskin00_06_extra.blp
+                        _ => "",
+                    };
                 case Constants.CharSection.Face:
                 case Constants.CharSection.HDFace:
-                    switch (material)
+                    return material switch
                     {
-                        case 0: return "facelower{0}" + suffix; // character/human/female/humanfemalefacelower00_00.blp
-                        case 1: return "faceupper{0}" + suffix; // character/human/female/humanfemalefaceupper00_00.blp
-                        default: return "";
-                    }
+                        0 => "facelower{0}" + suffix,// character/human/female/humanfemalefacelower00_00.blp
+                        1 => "faceupper{0}" + suffix,// character/human/female/humanfemalefaceupper00_00.blp
+                        _ => "",
+                    };
                 case Constants.CharSection.FacialHair:
                 case Constants.CharSection.HDFacialHair:
-                    switch (material)
+                    return material switch
                     {
-                        case 0: return "faciallowerhair{0}" + suffix; // character/human/faciallowerhair00_00.blp
-                        case 1: return "facialupperhair{0}" + suffix; // character/human/facialupperhair00_00.blp
-                        default: return "";
-                    }
+                        0 => "faciallowerhair{0}" + suffix,// character/human/faciallowerhair00_00.blp
+                        1 => "facialupperhair{0}" + suffix,// character/human/facialupperhair00_00.blp
+                        _ => "",
+                    };
                 case Constants.CharSection.Hair:
                 case Constants.CharSection.HDHair:
-                    switch (material)
+                    return material switch
                     {
-                        case 0: return "hair{0}" + suffix; // character/human/hair00_13.blp
-                        case 1: return "scalplowerhair{0}" + suffix; // character/human/scalplowerhair02_00.blp
-                        case 2: return "scalpupperhair{0}" + suffix; // character/human/male/scalpupperhair02_00_hd.blp
-                        default: return "";
-                    }
+                        0 => "hair{0}" + suffix,// character/human/hair00_13.blp
+                        1 => "scalplowerhair{0}" + suffix,// character/human/scalplowerhair02_00.blp
+                        2 => "scalpupperhair{0}" + suffix,// character/human/male/scalpupperhair02_00_hd.blp
+                        _ => "",
+                    };
                 case Constants.CharSection.Underwear:
                 case Constants.CharSection.HDUnderwear:
-                    switch (material)
+                    return material switch
                     {
-                        case 0: return "nakedpelvisskin{0}" + suffix; // character/human/female/humanfemalenakedpelvisskin00_00.blp
-                        case 1: return "nakedtorsoskin{0}" + suffix; // character/human/female/humanfemalenakedtorsoskin00_00.blp
-                        default: return "";
-                    }
+                        0 => "nakedpelvisskin{0}" + suffix,// character/human/female/humanfemalenakedpelvisskin00_00.blp
+                        1 => "nakedtorsoskin{0}" + suffix,// character/human/female/humanfemalenakedtorsoskin00_00.blp
+                        _ => "",
+                    };
                 case Constants.CharSection.Custom1:
                 case Constants.CharSection.HDCustom1:
-                    switch (material)
+                    return material switch
                     {
-                        case 0: return "tattoo{0}" + suffix; // character/lightforgeddraenei/female/lightforgeddraeneifemaletattoo00.blp
-                        default: return "";
-                    }
+                        0 => "tattoo{0}" + suffix,// character/lightforgeddraenei/female/lightforgeddraeneifemaletattoo00.blp
+                        _ => "",
+                    };
                 case Constants.CharSection.Custom2:
                 case Constants.CharSection.HDCustom2:
                 case Constants.CharSection.Custom3:

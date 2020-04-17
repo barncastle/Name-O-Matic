@@ -52,7 +52,7 @@ namespace NameOMatic.Formats.WMO
                 {
                     int fid = rec.Value.FieldAs<int>("FileDataID");
                     if (fid > 0 && listfile.TryGetValue(fid, out string filename))
-                        return new { WMOID = x.Key, FileName = filename.Substring(0, filename.Length - 14) };
+                        return new { WMOID = x.Key, FileName = filename[0..^14] };
                 }
 
                 return new { WMOID = 0, FileName = "" };

@@ -39,14 +39,12 @@ namespace NameOMatic.Helpers.WoWTools
                 {
                     Console.WriteLine("Requesting Build Diff data...");
 
-                    using (var client = new WebClientEx())
-                    {
-                        var url = string.Format(Endpoints.DiffAPI, PrevRootEKey, FileContext.Instance.RootEKey, DateTime.Now.Ticks).ToLowerInvariant();
-                        var response = client.DownloadString(url);
-                        var data = JToken.Parse(response)["data"];
+                    using var client = new WebClientEx();
+                    var url = string.Format(Endpoints.DiffAPI, PrevRootEKey, FileContext.Instance.RootEKey, DateTime.Now.Ticks).ToLowerInvariant();
+                    var response = client.DownloadString(url);
+                    var data = JToken.Parse(response)["data"];
 
-                        return data.Value<JArray>();
-                    }
+                    return data.Value<JArray>();
                 }
             }
             catch { }

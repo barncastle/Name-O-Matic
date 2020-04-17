@@ -23,16 +23,14 @@ namespace NameOMatic.Database.Lookups
             if (!File.Exists(Name))
                 throw new FileNotFoundException($"{Name} is missing");
 
-            using (var sr = new StreamReader(Name))
+            using var sr = new StreamReader(Name);
+            string line;
+            while ((line = sr.ReadLine()) != null)
             {
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    string[] parts = line.Split(';', 2);
+                string[] parts = line.Split(';', 2);
 
-                    if (ulong.TryParse(parts[0], NumberStyles.HexNumber, null, out var key))
-                        Records[key] = parts[1].ToByteArray();
-                }
+                if (ulong.TryParse(parts[0], NumberStyles.HexNumber, null, out var key))
+                    Records[key] = parts[1].ToByteArray();
             }
         }
 

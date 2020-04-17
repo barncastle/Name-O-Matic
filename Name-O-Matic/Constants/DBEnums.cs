@@ -4,12 +4,12 @@
     {
         public static string Get(int value)
         {
-            switch (value)
+            return value switch
             {
-                case 1: return "_s";
-                case 2: return "_e";
-                default: return "";
-            }
+                1 => "_s",
+                2 => "_e",
+                _ => "",
+            };
         }
     }
 

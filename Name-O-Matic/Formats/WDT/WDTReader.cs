@@ -20,21 +20,19 @@ namespace NameOMatic.Formats.WDT
                 return false;
             }
 
-            using (var stream = FileContext.Instance.OpenFile(fileID))
-            using (var reader = new BinaryReader(stream))
+            using var stream = FileContext.Instance.OpenFile(fileID);
+            using var reader = new BinaryReader(stream);
+            var chunkReader = new IffChunkReader(reader);
+            model = new WDTModel(fileID)
             {
-                var chunkReader = new IffChunkReader(reader);
-                model = new WDTModel(fileID)
-                {
-                    Header = Read<MPHD>(IffToken.MPHD, chunkReader, reader),
-                    MapIDs = ReadArray<MAID>(IffToken.MAID, chunkReader, reader)
-                };
+                Header = Read<MPHD>(IffToken.MPHD, chunkReader, reader),
+                MapIDs = ReadArray<MAID>(IffToken.MAID, chunkReader, reader)
+            };
 
-                foreach (var chunk in chunkReader.GetNewTokens(true))
-                    Tokens.Add(chunk, fileID);
+            foreach (var chunk in chunkReader.GetNewTokens(true))
+                Tokens.Add(chunk, fileID);
 
-                return true;
-            }
+            return true;
         }
 
         private T Read<T>(IffToken token, IffChunkReader chunkReader, BinaryReader reader) where T : struct

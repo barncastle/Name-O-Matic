@@ -18,7 +18,7 @@ namespace NameOMatic.Database.Storage
         public Expansion Expansion { get; }
         public string RootEKey { get; }
 
-        private CASCHandler Handler;
+        private readonly CASCHandler Handler;
         private CHashLookup CHashLookup;
 
         public CASCLibWrapper(string path, string product = null)

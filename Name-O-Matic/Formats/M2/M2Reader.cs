@@ -23,36 +23,34 @@ namespace NameOMatic.Formats.M2
                 return false;
             }
 
-            using (var stream = FileContext.Instance.OpenFile(fileID))
-            using (var reader = new BinaryReader(stream))
+            using var stream = FileContext.Instance.OpenFile(fileID);
+            using var reader = new BinaryReader(stream);
+            var chunkReader = new IffChunkReader(reader);
+            if (!chunkReader.GotoChunk(IffToken.MD21, out _))
             {
-                var chunkReader = new IffChunkReader(reader);
-                if (!chunkReader.GotoChunk(IffToken.MD21, out _))
-                {
-                    model = null;
-                    return false;
-                }
-
-                model = ParseMD20(reader, fileID);
-                if (chunkReader.GotoChunk(IffToken.LDV1, out _))
-                    ReadLDV1(reader, model);
-                if (chunkReader.GotoChunk(IffToken.SFID, out var sfidChunk))
-                    ReadSFID(reader, sfidChunk, model);
-
-                model.TextureFileIds = ReadArray<int>(IffToken.TXID, chunkReader, reader);
-                model.AnimFiles = ReadArray<AnimInfo>(IffToken.AFID, chunkReader, reader);
-                model.BoneFileIds = ReadArray<int>(IffToken.BFID, chunkReader, reader);
-                model.PhysFileId = Read<int>(IffToken.PFID, chunkReader, reader);
-                model.SkelFileId = Read<int>(IffToken.SKID, chunkReader, reader);
-
-                if (!ListFile.Instance.ContainsKey(fileID))
-                    DirectoryAnalyser.Analyse(model);
-
-                foreach (var chunk in chunkReader.GetNewTokens(true))
-                    Tokens.Add(chunk, fileID);
-
-                return true;
+                model = null;
+                return false;
             }
+
+            model = ParseMD20(reader, fileID);
+            if (chunkReader.GotoChunk(IffToken.LDV1, out _))
+                ReadLDV1(reader, model);
+            if (chunkReader.GotoChunk(IffToken.SFID, out var sfidChunk))
+                ReadSFID(reader, sfidChunk, model);
+
+            model.TextureFileIds = ReadArray<int>(IffToken.TXID, chunkReader, reader);
+            model.AnimFiles = ReadArray<AnimInfo>(IffToken.AFID, chunkReader, reader);
+            model.BoneFileIds = ReadArray<int>(IffToken.BFID, chunkReader, reader);
+            model.PhysFileId = Read<int>(IffToken.PFID, chunkReader, reader);
+            model.SkelFileId = Read<int>(IffToken.SKID, chunkReader, reader);
+
+            if (!ListFile.Instance.ContainsKey(fileID))
+                DirectoryAnalyser.Analyse(model);
+
+            foreach (var chunk in chunkReader.GetNewTokens(true))
+                Tokens.Add(chunk, fileID);
+
+            return true;
         }
 
 

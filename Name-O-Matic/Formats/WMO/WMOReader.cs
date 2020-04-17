@@ -20,25 +20,23 @@ namespace NameOMatic.Formats.WMO
                 return false;
             }
 
-            using (var stream = FileContext.Instance.OpenFile(fileID))
-            using (var reader = new BinaryReader(stream))
+            using var stream = FileContext.Instance.OpenFile(fileID);
+            using var reader = new BinaryReader(stream);
+            var chunkReader = new IffChunkReader(reader);
+            if (!chunkReader.GotoChunk(IffToken.MOHD, out _))
             {
-                var chunkReader = new IffChunkReader(reader);
-                if (!chunkReader.GotoChunk(IffToken.MOHD, out _))
-                {
-                    model = null;
-                    return false;
-                }
-
-                model = ParseMOHD(reader, fileID);
-                model.GroupFileDataId = ReadArray<int>(IffToken.GFID, chunkReader, reader);
-                model.Materials = ReadArray<MOMT>(IffToken.MOMT, chunkReader, reader);
-
-                foreach (var chunk in chunkReader.GetNewTokens())
-                    Tokens.Add(chunk, fileID);
-
-                return true;
+                model = null;
+                return false;
             }
+
+            model = ParseMOHD(reader, fileID);
+            model.GroupFileDataId = ReadArray<int>(IffToken.GFID, chunkReader, reader);
+            model.Materials = ReadArray<MOMT>(IffToken.MOMT, chunkReader, reader);
+
+            foreach (var chunk in chunkReader.GetNewTokens())
+                Tokens.Add(chunk, fileID);
+
+            return true;
         }
 
 

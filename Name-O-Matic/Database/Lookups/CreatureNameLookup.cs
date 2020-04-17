@@ -22,15 +22,13 @@ namespace NameOMatic.Database.Lookups
             if (!File.Exists(Name))
                 return;
 
-            using (var sr = new StreamReader(Name))
+            using var sr = new StreamReader(Name);
+            string line;
+            while ((line = sr.ReadLine()) != null)
             {
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    string[] parts = line.Split(',', 3);
-                    if (int.TryParse(parts[0], out int id))
-                        Records[id] = parts[2];
-                }
+                string[] parts = line.Split(',', 3);
+                if (int.TryParse(parts[0], out int id))
+                    Records[id] = parts[2];
             }
         }
 
