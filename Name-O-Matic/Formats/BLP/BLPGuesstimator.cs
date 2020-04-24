@@ -42,6 +42,7 @@ namespace NameOMatic.Formats.BLP
             // then return the most common occurrence
             var filename = matches.Distinct()
                                   .Select(x => FormatName(_listfile[x], basepath))
+                                  .Where(x => char.IsLetterOrDigit(x[^4]))
                                   .MostCommon(StringComparer.OrdinalIgnoreCase);
 
             // check it isn't a duplicate and isn't empty
