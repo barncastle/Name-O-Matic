@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using NameOMatic.Constants;
 using NameOMatic.Database;
 using NameOMatic.Extensions;
@@ -30,10 +31,10 @@ namespace NameOMatic.Formats.BLP
             var (CursorLeft, CursorTop) = (Console.CursorLeft, Console.CursorTop);
             Console.Write("Started BLP enumeration... ");
 
-            foreach (var file in ListFile.Instance)
+            Parallel.ForEach(ListFile.Instance, file =>
             {
                 if (!IsValid(file.Value))
-                    continue;
+                    return;
 
                 var match = BLPGuesstimator.FileIdSuffix.Match(file.Value);
                 if (match.Success)
@@ -42,7 +43,7 @@ namespace NameOMatic.Formats.BLP
                     if (!string.IsNullOrEmpty(filename) && filename != file.Value)
                         FileNames.Add(file.Key, filename);
                 }
-            }
+            });
 
             sw.StopAndLog("BLP", CursorLeft, CursorTop);
             return FileNames;
