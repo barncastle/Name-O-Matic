@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using NameOMatic.Database;
 
@@ -34,12 +35,12 @@ namespace NameOMatic.Formats.WMO
             for (int i = 0; i < GroupFileDataId.Length; i++)
             {
                 int group = i % NGroups;
-                int lod = (i / NGroups) - 1;
+                int lod = i / NGroups;
 
                 if (listfile.ContainsKey(GroupFileDataId[i]))
                     continue;
 
-                if (lod == -1)
+                if (lod == 0)
                     FileNames[GroupFileDataId[i]] = $"{name}_{group:D3}.wmo";
                 else
                     FileNames[GroupFileDataId[i]] = $"{name}_{group:D3}_lod{lod}.wmo";
