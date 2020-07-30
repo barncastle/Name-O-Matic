@@ -6,7 +6,7 @@ using NameOMatic.Extensions;
 
 namespace NameOMatic.Formats.DB2
 {
-    class BakedTexture : IDB2
+    internal class BakedTexture : IDB2
     {
         public IDictionary<int, string> FileNames { get; }
 

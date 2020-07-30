@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using NameOMatic.Constants;
 using NameOMatic.Database;
 using NameOMatic.Extensions;
 using NameOMatic.Helpers.Collections;
@@ -11,7 +10,7 @@ using NameOMatic.Helpers.WoWTools;
 
 namespace NameOMatic.Formats.M2
 {
-    class M2Enumerator : IFileNamer
+    internal class M2Enumerator : IFileNamer
     {
         public string Format { get; } = "M2";
         public bool Enabled { get; } = true;

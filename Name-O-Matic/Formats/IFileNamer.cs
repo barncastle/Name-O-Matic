@@ -1,9 +1,8 @@
-﻿using NameOMatic.Constants;
-using NameOMatic.Helpers.Collections;
+﻿using NameOMatic.Helpers.Collections;
 
 namespace NameOMatic.Formats
 {
-    interface IFileNamer
+    internal interface IFileNamer
     {
         string Format { get; }
         bool Enabled { get; }

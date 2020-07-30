@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using NameOMatic.Constants;
+using NameOMatic.Database.Lookups;
 using TACT.Net;
 using TACT.Net.Configs;
 using TACT.Net.Cryptography;
-using NameOMatic.Constants;
-using NameOMatic.Database.Lookups;
 
 namespace NameOMatic.Database.Storage
 {
     using CHashLookup = Dictionary<MD5Hash, IEnumerable<int>>;
 
-    class TACTNetWrapper : IStorage
+    internal class TACTNetWrapper : IStorage
     {
         public string Build { get; }
         public string FormattedBuild { get; }
@@ -76,7 +76,6 @@ namespace NameOMatic.Database.Storage
             return new int[0];
         }
 
-
         public void UpdateKeyService()
         {
             DBContext.Instance.TryLoad("TactKey", out var tactKey);
@@ -97,7 +96,6 @@ namespace NameOMatic.Database.Storage
             foreach (var kvp in lookup)
                 KeyService.TryAddKey(kvp.Key, kvp.Value);
         }
-
 
         private void GenerateCHashLookup()
         {

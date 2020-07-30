@@ -2,14 +2,13 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using NameOMatic.Constants;
 using NameOMatic.Extensions;
 using NameOMatic.Helpers.Collections;
 using NameOMatic.Helpers.WoWTools;
 
 namespace NameOMatic.Formats.ADTDAT
 {
-    class ADTDATEnumerator : IFileNamer
+    internal class ADTDATEnumerator : IFileNamer
     {
         public string Format { get; } = "ADTDAT";
         public bool Enabled { get; } = true;

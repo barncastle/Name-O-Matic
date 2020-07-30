@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NameOMatic.Extensions
 {
-    static class BinaryReaderExtensions
+    internal static class BinaryReaderExtensions
     {
         public static T Read<T>(this BinaryReader reader) where T : struct
         {

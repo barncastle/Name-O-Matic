@@ -3,7 +3,7 @@ using NameOMatic.Database;
 
 namespace NameOMatic.Formats.DB2
 {
-    class WMOMinimapTexture : IDB2
+    internal class WMOMinimapTexture : IDB2
     {
         public IDictionary<int, string> FileNames { get; }
 

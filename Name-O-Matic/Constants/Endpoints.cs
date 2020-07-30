@@ -1,6 +1,6 @@
 ﻿namespace NameOMatic.Constants
 {
-    static class Endpoints
+    internal static class Endpoints
     {
         public const string ListFile = "https://wow.tools/casc/listfile/download/csv/unverified";
 

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace NameOMatic.Helpers.Collections
 {
-    class UniqueLookup<TKey, TValue> : ILookup<TKey, TValue>
+    internal class UniqueLookup<TKey, TValue> : ILookup<TKey, TValue>
     {
         private readonly ConcurrentDictionary<TKey, IEnumerable<TValue>> _dictionary;
         private readonly IEqualityComparer<TValue> _valueComparer;
@@ -17,7 +17,6 @@ namespace NameOMatic.Helpers.Collections
             _dictionary = new ConcurrentDictionary<TKey, IEnumerable<TValue>>(keycomparer);
             _valueComparer = valuecomparer;
         }
-
 
         public int Count => _dictionary.Count(x => x.Value.Count() == 1);
 
@@ -51,11 +50,9 @@ namespace NameOMatic.Helpers.Collections
             AddRange(items);
         }
 
-
         public bool Contains(TKey key) => _dictionary.ContainsKey(key);
 
         public IEnumerable<TValue> this[TKey key] => _dictionary[key];
-
 
         public void TrimExcess()
         {
@@ -79,19 +76,17 @@ namespace NameOMatic.Helpers.Collections
             {
                 var value = valueFormatter != null ? valueFormatter.Invoke(entry.First()) : entry.First().ToString();
                 fs.WriteLine(entry.Key + ";" + value);
-            }                
+            }
         }
-
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumeratorInternal();
 
         IEnumerator<IGrouping<TKey, TValue>> IEnumerable<IGrouping<TKey, TValue>>.GetEnumerator() => GetEnumeratorInternal();
 
-        IEnumerator<IGrouping<TKey, TValue>> GetEnumeratorInternal()
+        private IEnumerator<IGrouping<TKey, TValue>> GetEnumeratorInternal()
         {
             return _dictionary.Where(x => x.Value.Count() == 1).Select(x => new Grouping(x)).GetEnumerator();
         }
-
 
         private IEnumerable<TValue> AddMethod(TValue value)
         {
@@ -103,7 +98,6 @@ namespace NameOMatic.Helpers.Collections
             ((ISet<TValue>)set).Add(value);
             return set;
         }
-
 
         private class Grouping : IGrouping<TKey, TValue>
         {

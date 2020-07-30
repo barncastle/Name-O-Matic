@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using NameOMatic.Constants;
 using NameOMatic.Extensions;
 using NameOMatic.Helpers.Collections;
 
 namespace NameOMatic.Formats.DB2
 {
-    class DB2Enumerator : IFileNamer
+    internal class DB2Enumerator : IFileNamer
     {
         public string Format { get; } = "DB2";
         public bool Enabled { get; } = true;
@@ -40,7 +39,6 @@ namespace NameOMatic.Formats.DB2
             sw.StopAndLog("DB2", CursorLeft, CursorTop);
             return FileNames;
         }
-
 
         private IEnumerable<T> GetAll<T>()
         {

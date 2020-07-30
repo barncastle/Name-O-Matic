@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NameOMatic.Database;
 
 namespace NameOMatic.Formats.WDT
 {
-    class WDTModel : IModel
+    internal class WDTModel : IModel
     {
         public IDictionary<int, string> FileNames { get; }
 
@@ -13,7 +12,6 @@ namespace NameOMatic.Formats.WDT
         public string Directory { get; set; }
         public MPHD Header { get; set; }
         public MAID[] MapIDs { get; set; }
-
 
         public WDTModel(int fileDataId)
         {

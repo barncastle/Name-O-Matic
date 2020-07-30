@@ -5,7 +5,7 @@ using NameOMatic.Extensions;
 
 namespace NameOMatic.Formats.ADTDAT
 {
-    class ADTDATModel : IModel
+    internal class ADTDATModel : IModel
     {
         public IDictionary<int, string> FileNames { get; private set; }
 

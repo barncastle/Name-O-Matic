@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NameOMatic.Extensions
 {
-    static class LinqExtensions
+    internal static class LinqExtensions
     {
         public static IEnumerable<TSource> Unique<TSource, TKey>(this IEnumerable<TSource> enumerable, Func<TSource, TKey> grouping)
         {
@@ -14,7 +14,7 @@ namespace NameOMatic.Extensions
         public static Dictionary<TKey, TElement> ToDictionarySafe<TSource, TKey, TElement>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector)
         {
             var d = new Dictionary<TKey, TElement>();
-            foreach (TSource element in source) 
+            foreach (TSource element in source)
                 d[keySelector(element)] = elementSelector(element);
             return d;
         }

@@ -1,7 +1,7 @@
-﻿using DBCD;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using DBCD;
 using NameOMatic.Constants;
 using NameOMatic.Database;
 
@@ -43,7 +43,6 @@ namespace NameOMatic.Formats.DB2
             GenerateUIPartyPose();
             GenerateZoneIntroMusicTable();
         }
-
 
         private void GenerateEmitterSounds()
         {
@@ -161,7 +160,6 @@ namespace NameOMatic.Formats.DB2
         private void GenerateZoneIntroMusicTable()
         {
             var introMusic = DBContext.Instance["ZoneIntroMusicTable"];
-            var build = FileContext.Instance.FormattedBuild;
             var expansion = (ExpansionFull)FileContext.Instance.Expansion;
 
             if (introMusic == null)
@@ -175,7 +173,6 @@ namespace NameOMatic.Formats.DB2
                 FormatTemplate($"sound/music/{expansion}/mus_{name}.mp3", soundKitId);
             }
         }
-
 
         private void FormatTemplate(string template, int soundKitID)
         {

@@ -6,7 +6,7 @@ using NameOMatic.Database;
 
 namespace NameOMatic.Formats.M2
 {
-    class M2Model : IModel
+    internal class M2Model : IModel
     {
         public IDictionary<int, string> FileNames { get; }
 
@@ -36,7 +36,6 @@ namespace NameOMatic.Formats.M2
             FileDataId = fileDataId;
             TryGetSuffix();
         }
-
 
         public void GenerateFileNames()
         {

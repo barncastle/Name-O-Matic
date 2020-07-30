@@ -5,7 +5,7 @@ using NameOMatic.Extensions;
 
 namespace NameOMatic.Formats.DB2
 {
-    class CharSection : IDB2
+    internal class CharSection : IDB2
     {
         public IDictionary<int, string> FileNames { get; }
 
@@ -84,6 +84,7 @@ namespace NameOMatic.Formats.DB2
                         1 => "skin{0}_extra" + suffix,// character/tauren/male/taurenmaleskin00_06_extra.blp
                         _ => "",
                     };
+
                 case Constants.CharSection.Face:
                 case Constants.CharSection.HDFace:
                     return material switch
@@ -92,6 +93,7 @@ namespace NameOMatic.Formats.DB2
                         1 => "faceupper{0}" + suffix,// character/human/female/humanfemalefaceupper00_00.blp
                         _ => "",
                     };
+
                 case Constants.CharSection.FacialHair:
                 case Constants.CharSection.HDFacialHair:
                     return material switch
@@ -100,6 +102,7 @@ namespace NameOMatic.Formats.DB2
                         1 => "facialupperhair{0}" + suffix,// character/human/facialupperhair00_00.blp
                         _ => "",
                     };
+
                 case Constants.CharSection.Hair:
                 case Constants.CharSection.HDHair:
                     return material switch
@@ -109,6 +112,7 @@ namespace NameOMatic.Formats.DB2
                         2 => "scalpupperhair{0}" + suffix,// character/human/male/scalpupperhair02_00_hd.blp
                         _ => "",
                     };
+
                 case Constants.CharSection.Underwear:
                 case Constants.CharSection.HDUnderwear:
                     return material switch
@@ -117,6 +121,7 @@ namespace NameOMatic.Formats.DB2
                         1 => "nakedtorsoskin{0}" + suffix,// character/human/female/humanfemalenakedtorsoskin00_00.blp
                         _ => "",
                     };
+
                 case Constants.CharSection.Custom1:
                 case Constants.CharSection.HDCustom1:
                     return material switch
@@ -124,6 +129,7 @@ namespace NameOMatic.Formats.DB2
                         0 => "tattoo{0}" + suffix,// character/lightforgeddraenei/female/lightforgeddraeneifemaletattoo00.blp
                         _ => "",
                     };
+
                 case Constants.CharSection.Custom2:
                 case Constants.CharSection.HDCustom2:
                 case Constants.CharSection.Custom3:

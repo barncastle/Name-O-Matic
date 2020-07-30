@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace NameOMatic.Formats.WMO
 {
     [StructLayout(LayoutKind.Sequential)]
-    struct WMOHeader
+    internal struct WMOHeader
     {
         public int nTextures;
         public int nGroups;
@@ -24,7 +24,7 @@ namespace NameOMatic.Formats.WMO
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    struct MOMT
+    internal struct MOMT
     {
         public readonly uint flags;
         public readonly int shader;

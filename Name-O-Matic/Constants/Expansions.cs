@@ -1,6 +1,6 @@
 ﻿namespace NameOMatic.Constants
 {
-    enum Expansion
+    internal enum Expansion
     {
         Alpha,
         Vanilla,
@@ -14,7 +14,7 @@
         Shadowlands
     }
 
-    enum ExpansionFull
+    internal enum ExpansionFull
     {
         Alpha,
         Vanilla,

@@ -3,7 +3,7 @@
 namespace NameOMatic.Formats.ADTDAT
 {
     [StructLayout(LayoutKind.Sequential)]
-    unsafe struct ACNKHeader
+    internal unsafe struct ACNKHeader
     {
         public int IndexX;
         public int IndexY;

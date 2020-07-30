@@ -1,5 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.IO;
+﻿using System.IO;
 using NameOMatic.Constants;
 using NameOMatic.Database;
 using NameOMatic.Extensions;
@@ -7,7 +6,7 @@ using NameOMatic.Helpers.Collections;
 
 namespace NameOMatic.Formats.ADTDAT
 {
-    class ADTDATReader : IReader<ADTDATModel>
+    internal class ADTDATReader : IReader<ADTDATModel>
     {
         public UniqueLookup<string, int> Tokens { get; } = new UniqueLookup<string, int>();
 

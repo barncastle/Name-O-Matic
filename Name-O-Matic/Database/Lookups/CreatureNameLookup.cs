@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
+﻿using System.IO;
 
 namespace NameOMatic.Database.Lookups
 {
-    class CreatureNameLookup : BaseLookup<int, string>
+    internal class CreatureNameLookup : BaseLookup<int, string>
     {
         public CreatureNameLookup() : base(Path.Combine("Lookups", "CreatureNameLookup.csv"))
         {

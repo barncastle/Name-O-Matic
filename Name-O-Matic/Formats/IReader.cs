@@ -1,9 +1,8 @@
-﻿using NameOMatic.Constants;
-using NameOMatic.Helpers.Collections;
+﻿using NameOMatic.Helpers.Collections;
 
 namespace NameOMatic.Formats
 {
-    interface IReader<T> where T : IModel
+    internal interface IReader<T> where T : IModel
     {
         UniqueLookup<string, int> Tokens { get; }
 

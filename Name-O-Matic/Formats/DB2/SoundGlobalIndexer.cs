@@ -5,7 +5,7 @@ using NameOMatic.Helpers;
 
 namespace NameOMatic.Formats.DB2
 {
-    class SoundGlobalIndexer : Singleton<SoundGlobalIndexer>, IReadOnlyDictionary<int, List<int>>
+    internal class SoundGlobalIndexer : Singleton<SoundGlobalIndexer>, IReadOnlyDictionary<int, List<int>>
     {
         private readonly Dictionary<int, List<int>> GlobalIndex;
 

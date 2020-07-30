@@ -7,7 +7,7 @@ using NameOMatic.Extensions;
 
 namespace NameOMatic.Formats.DB2
 {
-    class ComponentTextureFileData : IDB2
+    internal class ComponentTextureFileData : IDB2
     {
         public IDictionary<int, string> FileNames { get; }
 
@@ -57,7 +57,6 @@ namespace NameOMatic.Formats.DB2
                            Section = (ComponentSection)idir.Value.FieldAs<int>("ComponentSection"),
                            IconName = listfile[ia.Value.FieldAs<int>("DefaultIconFileDataID")]
                        };
-
 
             string slot, collection;
             foreach (var rec in temp.Unique(x => x.FileDataId))

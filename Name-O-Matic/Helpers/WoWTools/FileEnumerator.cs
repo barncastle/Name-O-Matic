@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using NameOMatic.Constants;
+using Newtonsoft.Json.Linq;
 
 namespace NameOMatic.Helpers.WoWTools
 {
-    class FileEnumerator : IEnumerable<int>, IDisposable
+    internal class FileEnumerator : IEnumerable<int>, IDisposable
     {
         private readonly string Filters;
 
@@ -21,7 +21,6 @@ namespace NameOMatic.Helpers.WoWTools
             _client = new WebClientEx();
             Filters = string.Join(",", parameters).ToLowerInvariant();
         }
-
 
         public IEnumerator<int> GetEnumerator()
         {
@@ -39,7 +38,6 @@ namespace NameOMatic.Helpers.WoWTools
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public void Reset() => Offset = 0;
-
 
         private void Request()
         {

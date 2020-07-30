@@ -8,7 +8,7 @@ using NameOMatic.Extensions;
 
 namespace NameOMatic.Formats
 {
-    class IffChunkReader : ILookup<IffToken, IffChunk>
+    internal class IffChunkReader : ILookup<IffToken, IffChunk>
     {
         private readonly ILookup<IffToken, IffChunk> _chunks;
         private readonly BinaryReader _reader;
@@ -32,7 +32,7 @@ namespace NameOMatic.Formats
 
         IEnumerator IEnumerable.GetEnumerator() => _chunks.GetEnumerator();
 
-        #endregion
+        #endregion Interface
 
         public bool GotoChunk(IffToken token, out IffChunk chunk)
         {
@@ -52,7 +52,6 @@ namespace NameOMatic.Formats
                 .Where(x => !Enum.IsDefined(typeof(IffToken), x))
                 .Select(x => x.ToToken(reverse));
         }
-
 
         private IList<IffChunk> IterateChunks(BinaryReader reader, IList<IffChunk> chunks = null, long? length = null)
         {

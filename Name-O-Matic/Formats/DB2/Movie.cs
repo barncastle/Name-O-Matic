@@ -3,7 +3,7 @@ using NameOMatic.Database;
 
 namespace NameOMatic.Formats.DB2
 {
-    class Movie : IDB2
+    internal class Movie : IDB2
     {
         public IDictionary<int, string> FileNames { get; }
 

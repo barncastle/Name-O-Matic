@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace NameOMatic.Database.Lookups
 {
-    class PrefixLookup : BaseLookup<string, string>
+    internal class PrefixLookup : BaseLookup<string, string>
     {
         public int MaxTokenCount { get; private set; }
 

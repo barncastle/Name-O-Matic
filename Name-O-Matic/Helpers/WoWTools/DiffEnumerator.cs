@@ -1,14 +1,14 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NameOMatic.Constants;
 using NameOMatic.Database;
+using Newtonsoft.Json.Linq;
 
 namespace NameOMatic.Helpers.WoWTools
 {
-    class DiffEnumerator : IEnumerable<int>
+    internal class DiffEnumerator : IEnumerable<int>
     {
         public string FileType { get; set; }
 
@@ -51,6 +51,5 @@ namespace NameOMatic.Helpers.WoWTools
 
             return new JArray();
         }
-
     }
 }

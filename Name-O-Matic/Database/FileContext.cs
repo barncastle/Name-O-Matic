@@ -1,13 +1,13 @@
-﻿using CASCLib;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
+using CASCLib;
 using NameOMatic.Constants;
 using NameOMatic.Database.Storage;
 using NameOMatic.Helpers;
 
 namespace NameOMatic.Database
 {
-    class FileContext : Singleton<FileContext>
+    internal class FileContext : Singleton<FileContext>
     {
         public string Build => Storage.Build;
         public string FormattedBuild => Storage.FormattedBuild;
@@ -40,6 +40,5 @@ namespace NameOMatic.Database
         public IEnumerable<int> GetMatchingFiles(int fileDataId) => Storage.GetMatchingFiles(fileDataId);
 
         public Stream OpenFile(int fileDataId) => Storage.OpenFile(fileDataId);
-
     }
 }

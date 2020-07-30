@@ -1,10 +1,10 @@
-﻿using DBCD.Providers;
-using System.IO;
+﻿using System.IO;
+using DBCD.Providers;
 using NameOMatic.Database;
 
 namespace NameOMatic.Helpers
 {
-    class CascDBCProvider : IDBCProvider
+    internal class CascDBCProvider : IDBCProvider
     {
         public Stream StreamForTableName(string tableName, string build)
         {

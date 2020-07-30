@@ -6,7 +6,7 @@ using NameOMatic.Extensions;
 
 namespace NameOMatic.Formats.BLP
 {
-    class BLPGuesstimator
+    internal class BLPGuesstimator
     {
         public readonly Regex FileIdSuffix;
 

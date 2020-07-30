@@ -1,15 +1,13 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using NameOMatic.Constants;
 using NameOMatic.Database;
 using NameOMatic.Extensions;
 using NameOMatic.Helpers.Collections;
 
 namespace NameOMatic.Formats.BLP
 {
-    class BLPEnumerator : IFileNamer
+    internal class BLPEnumerator : IFileNamer
     {
         public string Format { get; } = "BLP";
         public bool Enabled { get; } = true;

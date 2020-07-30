@@ -4,7 +4,7 @@ using NameOMatic.Database;
 
 namespace NameOMatic.Formats.DB2
 {
-    class GuildTextures : IDB2
+    internal class GuildTextures : IDB2
     {
         public IDictionary<int, string> FileNames { get; }
 
@@ -21,7 +21,6 @@ namespace NameOMatic.Formats.DB2
             EnumerateGuildTabardBorder();
             EnumerateGuildTabardEmblem();
         }
-
 
         private void EnumerateGuildEmblem()
         {
@@ -124,7 +123,6 @@ namespace NameOMatic.Formats.DB2
                 else
                     FileNames[textureID] = $"textures/guildemblems/{tier}bg_{color:D2}_{component}_u.blp";
             }
-
         }
 
         private void EnumerateGuildTabardEmblem()

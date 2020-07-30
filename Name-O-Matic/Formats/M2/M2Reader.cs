@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using NameOMatic.Constants;
 using NameOMatic.Database;
@@ -10,7 +9,7 @@ using NameOMatic.Helpers.Collections;
 
 namespace NameOMatic.Formats.M2
 {
-    class M2Reader : Singleton<M2Reader>, IReader<M2Model>
+    internal class M2Reader : Singleton<M2Reader>, IReader<M2Model>
     {
         public M2Guesstimator DirectoryAnalyser { get; } = new M2Guesstimator();
         public UniqueLookup<string, int> Tokens { get; } = new UniqueLookup<string, int>();
@@ -53,7 +52,6 @@ namespace NameOMatic.Formats.M2
             return true;
         }
 
-
         private M2Model ParseMD20(BinaryReader reader, int fileId)
         {
             var header = reader.Read<M2Header>();
@@ -80,7 +78,6 @@ namespace NameOMatic.Formats.M2
             model.SkinFileIds = reader.ReadArray<int>(views);
             model.LodSkinFileIds = reader.ReadArray<int>(Math.Min(model.NLod, count - views));
         }
-
 
         private T Read<T>(IffToken token, IffChunkReader chunkReader, BinaryReader reader) where T : struct
         {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using NameOMatic.Constants;
 using NameOMatic.Database;
 using NameOMatic.Extensions;
 using NameOMatic.Helpers.Collections;
@@ -9,7 +8,7 @@ using NameOMatic.Helpers.WoWTools;
 
 namespace NameOMatic.Formats.WDT
 {
-    class WDTEnumerator : IFileNamer
+    internal class WDTEnumerator : IFileNamer
     {
         public string Format { get; } = "WDT";
         public bool Enabled { get; } = true;

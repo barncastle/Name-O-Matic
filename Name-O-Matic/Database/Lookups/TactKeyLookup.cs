@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
+﻿using System.Globalization;
 using System.IO;
 using CASCLib;
 
 namespace NameOMatic.Database.Lookups
 {
-    class TactKeyLookup : BaseLookup<ulong, byte[]>
+    internal class TactKeyLookup : BaseLookup<ulong, byte[]>
     {
         public TactKeyLookup() : base(Path.Combine("Lookups", "TactKeyLookup.txt"))
         {

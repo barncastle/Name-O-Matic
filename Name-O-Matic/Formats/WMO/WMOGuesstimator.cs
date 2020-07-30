@@ -9,7 +9,7 @@ namespace NameOMatic.Formats.WMO
 {
     using WMOAreaMap = Dictionary<int, (string AreaName, int AreaTableID)>;
 
-    class WMOGuesstimator : Singleton<WMOGuesstimator>
+    internal class WMOGuesstimator : Singleton<WMOGuesstimator>
     {
         private Dictionary<int, string> WMONameMap;
         private WMOAreaMap WMOAreaMap;
@@ -19,7 +19,6 @@ namespace NameOMatic.Formats.WMO
             WMONameMap = new Dictionary<int, string>(0x1000);
             BuildLookups();
         }
-
 
         public bool GetPreviousName(int wmoid, out string value) => WMONameMap.TryGetValue(wmoid, out value);
 
@@ -39,7 +38,6 @@ namespace NameOMatic.Formats.WMO
             value = "";
             return false;
         }
-
 
         private void BuildLookups()
         {

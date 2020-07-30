@@ -7,7 +7,7 @@ using NameOMatic.Database;
 
 namespace NameOMatic.Formats.DB2
 {
-    class CreatureDisplayInfo : IDB2
+    internal class CreatureDisplayInfo : IDB2
     {
         public IDictionary<int, string> FileNames { get; }
 
@@ -36,7 +36,7 @@ namespace NameOMatic.Formats.DB2
              * ignore records listfile.contains(creatureModelData.FileDataID) :: already named
              * explode creatureDisplayInfo.TextureId[]
              * select { creatureDisplayInfo.TextureId, creatureModelData.FileName }
-             * ignore records creatureDisplayInfo.TextureId == 0 || 
+             * ignore records creatureDisplayInfo.TextureId == 0 ||
              *                !listfile.contains(creatureDisplayInfo.TextureId)
              */
 

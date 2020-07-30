@@ -1,12 +1,12 @@
-﻿using DBCD;
-using DBCD.Providers;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using DBCD;
+using DBCD.Providers;
 using NameOMatic.Helpers;
 
 namespace NameOMatic.Database
 {
-    class DBContext : Singleton<DBContext>
+    internal class DBContext : Singleton<DBContext>
     {
         private readonly Dictionary<string, IDBCDStorage> DBSets;
         private readonly DBCD.DBCD DBCD;
@@ -16,7 +16,6 @@ namespace NameOMatic.Database
             DBSets = new Dictionary<string, IDBCDStorage>(StringComparer.OrdinalIgnoreCase);
             DBCD = new DBCD.DBCD(new CascDBCProvider(), new GithubDBDProvider());
         }
-
 
         public IDictionary<int, DBCDRow> this[string name]
         {
@@ -55,7 +54,6 @@ namespace NameOMatic.Database
         }
 
         public bool TryGet(string name, out IDBCDStorage storage) => DBSets.TryGetValue(name, out storage) && storage != null;
-
 
         public static readonly Dictionary<string, int> FileLookup = new Dictionary<string, int>
         {

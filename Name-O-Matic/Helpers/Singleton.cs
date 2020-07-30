@@ -1,6 +1,6 @@
 ﻿namespace NameOMatic.Helpers
 {
-    class Singleton<T> where T : class, new()
+    internal class Singleton<T> where T : class, new()
     {
         private static volatile T instance;
         private static readonly object syncRoot = new object();

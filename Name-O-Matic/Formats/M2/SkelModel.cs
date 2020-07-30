@@ -4,7 +4,7 @@ using NameOMatic.Database;
 
 namespace NameOMatic.Formats.M2
 {
-    class SkelModel : IModel
+    internal class SkelModel : IModel
     {
         public IDictionary<int, string> FileNames { get; }
 
@@ -20,7 +20,6 @@ namespace NameOMatic.Formats.M2
 
             FileDataId = fileDataId;
         }
-
 
         public void GenerateFileNames()
         {

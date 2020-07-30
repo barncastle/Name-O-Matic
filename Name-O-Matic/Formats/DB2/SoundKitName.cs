@@ -7,7 +7,7 @@ using NameOMatic.Database;
 
 namespace NameOMatic.Formats.DB2
 {
-    class SoundKitName : IDB2
+    internal class SoundKitName : IDB2
     {
         public IDictionary<int, string> FileNames { get; }
 
@@ -139,6 +139,5 @@ namespace NameOMatic.Formats.DB2
             "_pissed", "_preaggro", "_stand", "_wound", "_woundcrit", "_wound_crit",
             "_run", "_eat", "_mount", "_mountspecial",
         };
-
     }
 }

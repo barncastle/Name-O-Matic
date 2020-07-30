@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using NameOMatic.Constants;
 using NameOMatic.Database;
@@ -8,7 +7,7 @@ using NameOMatic.Helpers.Collections;
 
 namespace NameOMatic.Formats.WMO
 {
-    class WMOReader : IReader<WMOModel>
+    internal class WMOReader : IReader<WMOModel>
     {
         public UniqueLookup<string, int> Tokens { get; } = new UniqueLookup<string, int>();
 
@@ -38,7 +37,6 @@ namespace NameOMatic.Formats.WMO
 
             return true;
         }
-
 
         private WMOModel ParseMOHD(BinaryReader reader, int fileId)
         {

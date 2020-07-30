@@ -2,7 +2,7 @@
 
 namespace NameOMatic.Formats.DB2
 {
-    interface IDB2
+    internal interface IDB2
     {
         IDictionary<int, string> FileNames { get; }
 

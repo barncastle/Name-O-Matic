@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace NameOMatic.Formats.M2
 {
     [StructLayout(LayoutKind.Sequential)]
-    struct M2Header
+    internal struct M2Header
     {
         public int Magic;
         public int Version;

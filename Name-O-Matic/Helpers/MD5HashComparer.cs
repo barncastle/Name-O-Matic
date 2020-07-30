@@ -1,12 +1,12 @@
-﻿using CASCLib;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using CASCLib;
 
 namespace NameOMatic.Helpers
 {
-    class CASCLibMD5HashComparer : IEqualityComparer<MD5Hash>
+    internal class CASCLibMD5HashComparer : IEqualityComparer<MD5Hash>
     {
-        const uint FnvPrime32 = 16777619;
-        const uint FnvOffset32 = 2166136261;
+        private const uint FnvPrime32 = 16777619;
+        private const uint FnvOffset32 = 2166136261;
 
         public unsafe bool Equals(MD5Hash x, MD5Hash y)
         {

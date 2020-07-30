@@ -36,9 +36,9 @@ namespace NameOMatic.Formats.DB2
                     // I guess we could scrape these from wowhead/mmoc/the client??
                     if (modelRec != null && listfile.TryGetValue(modelRec.FieldAs<int>("FileDataID"), out string modelFile) && modelFile.StartsWith("creature"))
                     {
-                        // convert the model filename to a creature sound filename  
+                        // convert the model filename to a creature sound filename
                         var parts = modelFile.Split('/');
-                        name = parts[parts.Length - 2];
+                        name = parts[^2];
                     }
                     else
                     {
@@ -150,6 +150,6 @@ namespace NameOMatic.Formats.DB2
             }
         }
 
-        #endregion
+        #endregion Creature Sound Helpers
     }
 }

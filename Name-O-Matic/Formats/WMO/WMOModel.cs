@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using NameOMatic.Database;
 
 namespace NameOMatic.Formats.WMO
 {
-    class WMOModel : IModel
+    internal class WMOModel : IModel
     {
         public IDictionary<int, string> FileNames { get; }
 

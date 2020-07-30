@@ -9,7 +9,7 @@ using NameOMatic.Database;
 
 namespace NameOMatic.Formats.DB2
 {
-    class ItemDisplayInfo : IDB2
+    internal class ItemDisplayInfo : IDB2
     {
         public IDictionary<int, string> FileNames { get; }
 

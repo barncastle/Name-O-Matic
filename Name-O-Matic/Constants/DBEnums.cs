@@ -1,6 +1,6 @@
 ﻿namespace NameOMatic.Constants
 {
-    sealed class TextureSuffix
+    internal sealed class TextureSuffix
     {
         public static string Get(int value)
         {

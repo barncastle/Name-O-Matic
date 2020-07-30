@@ -5,7 +5,7 @@ using CommandLine;
 
 namespace NameOMatic
 {
-    class Options
+    internal class Options
     {
         [Option("path", Required = true, HelpText = "TACT/CAS repository location")]
         public string Path { get; set; }
@@ -24,7 +24,6 @@ namespace NameOMatic
 
         [Option("type", HelpText = "", Separator = ',')]
         public IEnumerable<string> Formats { get; set; }
-
 
         public bool IsValidFormat(string format)
         {

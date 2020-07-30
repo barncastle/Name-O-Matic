@@ -1,17 +1,17 @@
-﻿using CASCLib;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using CASCLib;
 using NameOMatic.Constants;
-using NameOMatic.Helpers;
 using NameOMatic.Database.Lookups;
+using NameOMatic.Helpers;
 
 namespace NameOMatic.Database.Storage
 {
     using CHashLookup = Dictionary<MD5Hash, IEnumerable<int>>;
 
-    class CASCLibWrapper : IStorage
+    internal class CASCLibWrapper : IStorage
     {
         public string Build => Handler.Config.VersionName;
         public string FormattedBuild { get; }
@@ -58,7 +58,6 @@ namespace NameOMatic.Database.Storage
             return new int[0];
         }
 
-
         public void UpdateKeyService()
         {
             DBContext.Instance.TryLoad("TactKey", out var tactKey);
@@ -79,7 +78,6 @@ namespace NameOMatic.Database.Storage
             foreach (var kvp in lookup)
                 KeyService.SetKey(kvp.Key, kvp.Value);
         }
-
 
         private void GenerateCHashLookup()
         {

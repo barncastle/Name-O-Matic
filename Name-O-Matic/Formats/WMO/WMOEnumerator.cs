@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using NameOMatic.Constants;
 using NameOMatic.Database;
 using NameOMatic.Extensions;
 using NameOMatic.Helpers.Collections;
@@ -10,7 +9,7 @@ using NameOMatic.Helpers.WoWTools;
 
 namespace NameOMatic.Formats.WMO
 {
-    class WMOEnumerator : IFileNamer
+    internal class WMOEnumerator : IFileNamer
     {
         public string Format { get; } = "WMO";
         public bool Enabled { get; } = true;
@@ -20,7 +19,9 @@ namespace NameOMatic.Formats.WMO
         private readonly DiffEnumerator DiffEnumerator;
         private readonly FileEnumerator FileEnumerator;
         private readonly WMOReader Reader;
+#pragma warning disable IDE0052 // Remove unread private members
         private readonly BLP.BLPGuesstimator BLPGuesstimator;
+#pragma warning restore IDE0052 // Remove unread private members
 
         public WMOEnumerator(DiffEnumerator diff)
         {

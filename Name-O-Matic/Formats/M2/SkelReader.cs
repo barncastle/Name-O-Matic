@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using NameOMatic.Constants;
 using NameOMatic.Database;
@@ -9,7 +8,7 @@ using NameOMatic.Helpers.Collections;
 
 namespace NameOMatic.Formats.M2
 {
-    class SkelReader : Singleton<SkelReader>, IReader<SkelModel>
+    internal class SkelReader : Singleton<SkelReader>, IReader<SkelModel>
     {
         public UniqueLookup<string, int> Tokens { get; } = new UniqueLookup<string, int>();
 

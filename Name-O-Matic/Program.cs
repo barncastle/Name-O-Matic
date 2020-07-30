@@ -1,31 +1,26 @@
-﻿using CommandLine;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using CommandLine;
 using NameOMatic.Database;
-using NameOMatic.Formats.ADTDAT;
+using NameOMatic.Formats;
 using NameOMatic.Formats.DB2;
-using NameOMatic.Formats.M2;
-using NameOMatic.Formats.WDT;
-using NameOMatic.Formats.WMO;
 using NameOMatic.Helpers.Collections;
 using NameOMatic.Helpers.WoWTools;
-using NameOMatic.Constants;
-using NameOMatic.Formats;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Linq;
 
 namespace NameOMatic
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var options = Parser.Default.ParseArguments<Options>(args);
             if (options.Tag == ParserResultType.Parsed)
                 options.WithParsed(Run);
         }
 
-        static void Run(Options options)
+        private static void Run(Options options)
         {
             // load listfile and storage
             ListFile.Instance.Load();
@@ -44,7 +39,7 @@ namespace NameOMatic
                 tokens.Merge(fileNamer.Tokens);
             }
 
-            // special case guaranteed to be correct           
+            // special case guaranteed to be correct
             lookup.ReplaceRange(ManifestInterfaceData.Enumerate());
 
             // export
@@ -55,7 +50,7 @@ namespace NameOMatic
             Console.ReadLine();
         }
 
-        static IEnumerable<IFileNamer> GetFileNamers(DiffEnumerator diff, Options options)
+        private static IEnumerable<IFileNamer> GetFileNamers(DiffEnumerator diff, Options options)
         {
             var defaultParams = new Type[] { typeof(DiffEnumerator) };
             var results = new SortedList<string, IFileNamer>(0x10);

@@ -2,7 +2,7 @@
 
 namespace NameOMatic.Formats
 {
-    interface IModel
+    internal interface IModel
     {
         IDictionary<int, string> FileNames { get; }
 

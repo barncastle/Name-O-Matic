@@ -5,7 +5,7 @@ using NameOMatic.Database;
 
 namespace NameOMatic.Formats.DB2
 {
-    class ZoneMusic : IDB2
+    internal class ZoneMusic : IDB2
     {
         public IDictionary<int, string> FileNames { get; }
 

@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using NameOMatic.Constants;
 using NameOMatic.Database;
@@ -8,7 +7,7 @@ using NameOMatic.Helpers.Collections;
 
 namespace NameOMatic.Formats.WDT
 {
-    class WDTReader : IReader<WDTModel>
+    internal class WDTReader : IReader<WDTModel>
     {
         public UniqueLookup<string, int> Tokens { get; } = new UniqueLookup<string, int>();
 

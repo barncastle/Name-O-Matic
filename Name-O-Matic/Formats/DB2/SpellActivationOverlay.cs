@@ -4,7 +4,7 @@ using NameOMatic.Database;
 
 namespace NameOMatic.Formats.DB2
 {
-    class SpellActivationOverlay : IDB2
+    internal class SpellActivationOverlay : IDB2
     {
         public IDictionary<int, string> FileNames { get; }
 

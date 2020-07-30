@@ -4,7 +4,7 @@ using NameOMatic.Constants;
 
 namespace NameOMatic.Formats
 {
-    class IffChunk
+    internal class IffChunk
     {
         public readonly IffToken Token;
         public readonly int Size;

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Text;
 using NameOMatic.Constants;
 
 namespace NameOMatic.Extensions
 {
-    static class Extensions
+    internal static class Extensions
     {
         public static void StopAndLog(this Stopwatch sw, string format, int left, int top)
         {

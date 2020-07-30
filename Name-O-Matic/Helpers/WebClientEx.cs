@@ -3,16 +3,16 @@ using System.Net;
 
 namespace NameOMatic.Helpers
 {
-    class WebClientEx : WebClient
+    internal class WebClientEx : WebClient
     {
         public DecompressionMethods AutomaticDecompression { get; set; }
         public string Method { get; set; }
 
-
-        public WebClientEx() { }
+        public WebClientEx()
+        {
+        }
 
         public WebClientEx(DecompressionMethods decompression) => AutomaticDecompression = decompression;
-
 
         protected override WebRequest GetWebRequest(Uri address)
         {

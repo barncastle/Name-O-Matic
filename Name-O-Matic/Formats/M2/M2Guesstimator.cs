@@ -6,7 +6,7 @@ using NameOMatic.Database.Lookups;
 
 namespace NameOMatic.Formats.M2
 {
-    class M2Guesstimator
+    internal class M2Guesstimator
     {
         private const StringComparison IgnoreCase = StringComparison.OrdinalIgnoreCase;
         private readonly PrefixLookup PrefixMap;
@@ -55,7 +55,6 @@ namespace NameOMatic.Formats.M2
             CreatureModelDataIDs.Clear();
         }
 
-
         private bool IsCharacter(M2Model model)
         {
             string name = model.InternalName;
@@ -77,7 +76,7 @@ namespace NameOMatic.Formats.M2
 
         private bool IsSky(M2Model model)
         {
-            if (SkyboxIDs.Contains(model.FileDataId) || 
+            if (SkyboxIDs.Contains(model.FileDataId) ||
                 CelestialSkyboxIDs.Contains(model.FileDataId) ||
                 model.InternalName.EndsWith("sky01", StringComparison.OrdinalIgnoreCase))
             {
@@ -151,11 +150,11 @@ namespace NameOMatic.Formats.M2
             }
 
             // fallback for number prefixed models
-            if(parts.Length == 1 && char.IsDigit(parts[0][0]))
+            if (parts.Length == 1 && char.IsDigit(parts[0][0]))
             {
-                foreach(var map in PrefixMap)
+                foreach (var map in PrefixMap)
                 {
-                    if(model.InternalName.StartsWith(map.Key, StringComparison.OrdinalIgnoreCase))
+                    if (model.InternalName.StartsWith(map.Key, StringComparison.OrdinalIgnoreCase))
                     {
                         model.Directory = map.Value;
                         return true;

@@ -3,7 +3,7 @@
 namespace NameOMatic.Formats.WDT
 {
     [StructLayout(LayoutKind.Sequential)]
-    struct MPHD
+    internal struct MPHD
     {
         public int Flags;
         public int LgtFile;
@@ -16,7 +16,7 @@ namespace NameOMatic.Formats.WDT
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    struct MAID
+    internal struct MAID
     {
         public int RootADT;
         public int Obj0ADT;

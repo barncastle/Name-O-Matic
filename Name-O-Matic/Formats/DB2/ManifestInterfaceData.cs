@@ -5,7 +5,7 @@ using NameOMatic.Database;
 
 namespace NameOMatic.Formats.DB2
 {
-    static class ManifestInterfaceData
+    internal static class ManifestInterfaceData
     {
         public static IDictionary<int, string> Enumerate()
         {

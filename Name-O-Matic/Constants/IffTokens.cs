@@ -4,6 +4,7 @@
     {
         // M2
         MD21 = 0x3132444D,
+
         PFID = 0x44494650,
         SFID = 0x44494653,
         AFID = 0x44494641,
@@ -27,18 +28,24 @@
         PFDC = 0x43444650,
         EDGF = 0x46474445,
         NERF = 0x4652454E,
+
         // Skel
         SKL1 = 0x314C4B53,
+
         SKA1 = 0x31414B53,
         SKB1 = 0x31424B53,
         SKS1 = 0x31534B53,
         SKPD = 0x44504B53,
+
         // Anim
         AFM2 = 0x324D4641,
+
         AFSA = 0x41534641,
         AFSB = 0x42534641,
+
         // WMO
         MVER = 0x4D564552,
+
         MOMO = 0x4D4F4D4F,
         MOHD = 0x4D4F4844,
         MOTX = 0x4D4F5458,
@@ -108,8 +115,10 @@
         MDDL = 0x4D44444C,
         MAVR = 0x4D415652,
         MNLR = 0x4D4E4C52,
+
         // ADT v18
         MHDR = 0x4D484452,
+
         MCIN = 0x4D43494E,
         MTEX = 0x4D544558,
         MDID = 0x4D444944,
@@ -163,8 +172,10 @@
         MLFD = 0x4D4C4644,
         MBMB = 0x4D424D42,
         MLMB = 0x4D4C4D42,
+
         // ADT v22+
         AHDR = 0x41484452,
+
         AVTX = 0x41565458,
         ANRM = 0x414E524D,
         ATEX = 0x41544558,
@@ -176,8 +187,10 @@
         ACDO = 0x4143444F,
         AFBO = 0x4146424F,
         ACVT = 0x41435654,
+
         // WDT
         MPHD = 0x4D504844,
+
         MAIN = 0x4D41494E,
         MAID = 0x4D414944,
         MAOI = 0x4D414F49,

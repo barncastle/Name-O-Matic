@@ -3,7 +3,7 @@ using NameOMatic.Database;
 
 namespace NameOMatic.Formats.DB2
 {
-    class LiquidTypeXTexture : IDB2
+    internal class LiquidTypeXTexture : IDB2
     {
         public IDictionary<int, string> FileNames { get; }
 

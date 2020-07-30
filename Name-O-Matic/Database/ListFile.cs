@@ -9,7 +9,7 @@ using NameOMatic.Helpers;
 
 namespace NameOMatic.Database
 {
-    class ListFile : Singleton<ListFile>, IDictionary<int, string>
+    internal class ListFile : Singleton<ListFile>, IDictionary<int, string>
     {
         public const string Filename = "ListFile.csv";
 
@@ -63,7 +63,6 @@ namespace NameOMatic.Database
 
         public void Dispose() => File.Delete(Filename);
 
-
         public ICollection<int> Keys => Records.Keys;
 
         public ICollection<string> Values => Records.Values;
@@ -73,7 +72,6 @@ namespace NameOMatic.Database
         public bool IsReadOnly => false;
 
         public string this[int key] { get => Records[key]; set => Records[key] = value; }
-
 
         public void Add(int key, string value) => Records.Add(key, value);
 
