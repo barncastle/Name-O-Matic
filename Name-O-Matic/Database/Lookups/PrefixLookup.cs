@@ -6,51 +6,23 @@ using System.Linq;
 
 namespace NameOMatic.Database.Lookups
 {
-    class PrefixLookup : IReadOnlyDictionary<string, string>
+    class PrefixLookup : BaseLookup<string, string>
     {
-        private readonly string Name = Path.Combine("Lookups", "PrefixLookup.txt");
-        private readonly Dictionary<string, string> Records;
+        public int MaxTokenCount { get; private set; }
 
-        public int SplitSize { get; private set; }
+        public PrefixLookup() : base(Path.Combine("Lookups", "PrefixLookup.txt"))
+        { }
 
-        public PrefixLookup() => Records = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-
-        public void Populate()
+        protected override void ParseLine(string line)
         {
-            if (!File.Exists(Name))
-                throw new FileNotFoundException($"{Name} is missing");
+            string[] parts = line.Split(';', 2);
 
-            using (var sr = new StreamReader(Name))
-            {
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    string[] parts = line.Split(';', 2);
+            if (!parts[1].EndsWith('/'))
+                parts[1] += '/';
 
-                    if (!parts[1].EndsWith('/'))
-                        parts[1] += '/';
+            this[parts[0]] = parts[1];
 
-                    Records[parts[0]] = parts[1];
-                }
-            }
-
-            SplitSize = Records.Keys.Max(x => x.Split('_').Length) + 1;
+            MaxTokenCount = Math.Max(parts[0].Split('_').Length + 1, MaxTokenCount);
         }
-
-        public string this[string key] => Records[key];
-
-        public IEnumerable<string> Keys => Records.Keys;
-
-        public IEnumerable<string> Values => Records.Values;
-
-        public int Count => Records.Count;
-
-        public bool ContainsKey(string key) => Records.ContainsKey(key);
-
-        public IEnumerator<KeyValuePair<string, string>> GetEnumerator() => Records.GetEnumerator();
-
-        public bool TryGetValue(string key, out string value) => Records.TryGetValue(key, out value);
-
-        IEnumerator IEnumerable.GetEnumerator() => Records.GetEnumerator();
     }
 }

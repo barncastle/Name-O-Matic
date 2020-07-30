@@ -137,7 +137,7 @@ namespace NameOMatic.Formats.M2
 
         private bool HasPrefix(M2Model model)
         {
-            string[] parts = model.InternalName.Split('_', PrefixMap.SplitSize);
+            string[] parts = model.InternalName.Split('_', PrefixMap.MaxTokenCount);
 
             string prefix;
             for (int i = parts.Length; i > 0; i--)
