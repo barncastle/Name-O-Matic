@@ -12,10 +12,10 @@ namespace NameOMatic.Database.Lookups
 
         private readonly Dictionary<TKey, TValue> Records;
 
-        public BaseLookup(string filepath)
+        public BaseLookup(string filepath, IEqualityComparer<TKey> comparer = null)
         {
             Name = filepath;
-            Records = new Dictionary<TKey, TValue>();
+            Records = new Dictionary<TKey, TValue>(comparer);
         }
 
         public TValue this[TKey key] { get => Records[key]; set => Records[key] = value; }

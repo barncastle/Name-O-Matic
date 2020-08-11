@@ -7,7 +7,7 @@ namespace NameOMatic.Database.Lookups
     {
         public int MaxTokenCount { get; private set; }
 
-        public PrefixLookup() : base(Path.Combine("Lookups", "PrefixLookup.txt"))
+        public PrefixLookup() : base(Path.Combine("Lookups", "PrefixLookup.txt"), StringComparer.OrdinalIgnoreCase)
         { }
 
         protected override void ParseLine(string line)
