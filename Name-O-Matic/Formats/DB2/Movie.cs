@@ -33,7 +33,10 @@ namespace NameOMatic.Formats.DB2
             {
                 var fileDataID = rec.Value.FieldAs<int>("FileDataID");
                 var movieID = rec.Value.FieldAs<int>("MovieID");
-                var resolution = movieFileData[fileDataID].FieldAs<int>("Resolution");
+                var resolution = 0;
+
+                if (movieFileData.ContainsKey(fileDataID))
+                    resolution = movieFileData[fileDataID].FieldAs<int>("Resolution");
 
                 if (listfile.ContainsKey(fileDataID))
                     continue;
