@@ -204,6 +204,6 @@
         PVMI = 0x50564D49,
         PVBD = 0x50564244,
         MNAM = 0x4D414E4D,
-        MPL3 = 0x334C504D,
+        MPL3 = 0x4D504C33,
     }
 }
