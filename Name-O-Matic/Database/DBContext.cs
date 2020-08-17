@@ -79,6 +79,7 @@ namespace NameOMatic.Database
             ["GuildTabardBackground"] = 2909769,
             ["GuildTabardBorder"] = 2920485,
             ["GuildTabardEmblem"] = 2910470,
+            ["ItemAppearance"] = 982462,
             ["ItemDisplayInfo"] = 1266429,
             ["ItemDisplayInfoMaterialRes"] = 1280614,
             ["LightSkybox"] = 1308501,
