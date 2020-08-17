@@ -29,7 +29,10 @@ namespace NameOMatic.Formats.DB2
             foreach (var db2 in GetAll<IDB2>())
             {
                 if (!db2.IsValid)
+                {
+                    Console.WriteLine($"\t{db2.GetType().Name} is invalid");
                     continue;
+                }                   
 
                 Console.WriteLine("\t" + db2.GetType().Name);
                 db2.Enumerate();
