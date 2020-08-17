@@ -63,6 +63,9 @@ namespace NameOMatic.Formats.DB2
             {
                 // use the icon to guesstimate the slot and collection name
                 var parts = Path.GetFileNameWithoutExtension(rec.IconName).Split('_', 3);
+                if (parts.Length < 3)
+                    continue;
+
                 slot = parts[1];
                 collection = parts[2];
 
