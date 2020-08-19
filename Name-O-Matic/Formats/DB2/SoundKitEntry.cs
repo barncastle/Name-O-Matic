@@ -180,7 +180,7 @@ namespace NameOMatic.Formats.DB2
             {
                 if (fileIds.Count == 1)
                 {
-                    if (!ListFile.Instance.ContainsKey(fileIds[0]) && !FileNames.ContainsKey(fileIds[0]) && fileIds[i] > 1730233)
+                    if (!ListFile.Instance.ContainsKey(fileIds[0]) && !FileNames.ContainsKey(fileIds[0]) && fileIds[0] > 1730233)
                         FileNames[fileIds[0]] = string.Format(template, "");
                 }
                 else
