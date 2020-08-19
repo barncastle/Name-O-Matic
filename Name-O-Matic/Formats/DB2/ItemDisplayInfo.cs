@@ -77,10 +77,10 @@ namespace NameOMatic.Formats.DB2
             if (modelNames.Length == 0)
                 return "";
             if (modelNames.Length == 1)
-                return Path.ChangeExtension(modelNames[0], null);
+                return Path.ChangeExtension(modelNames[0], null).Replace("\\", "/");
 
             // extract the directory name of the first model
-            string path = Path.GetDirectoryName(modelNames[0]);
+            string path = Path.GetDirectoryName(modelNames[0]).Replace("\\", "/");
             string[][] parts = new string[modelNames.Length][];
 
             // split the filenames by "_" blizzard's most common seperator
@@ -99,10 +99,10 @@ namespace NameOMatic.Formats.DB2
             for (int i = 0; i < minlen; i++)
                 for (int j = 0; j < parts.Length; j++)
                     if (parts[0][i] != parts[j][i])
-                        return Path.Combine(path, string.Join('_', parts[0], 0, i));
+                        return Path.Combine(string.Join('_', parts[0], 0, i)).Replace("\\", "/");
 
             // fallback to the first model if all names are identical - this is impossible
-            return Path.ChangeExtension(modelNames[0], null);
+            return Path.ChangeExtension(modelNames[0], null).Replace("\\", "/");
         }
 
         private Dictionary<int, int[]> CreateLookup(IDictionary<int, DBCD.DBCDRow> source, string key)
