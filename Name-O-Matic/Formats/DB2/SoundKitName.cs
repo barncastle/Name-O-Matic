@@ -103,6 +103,9 @@ namespace NameOMatic.Formats.DB2
 
         private void FormatTemplate(string template, int soundKitID, int fileDataID, string soundname)
         {
+            if (fileDataID <= 1730233) // mapped non-existant files
+                return;
+
             if (GlobalIndex[soundKitID].Count <= 1)
             {
                 FileNames[fileDataID] = string.Format(template, soundname);

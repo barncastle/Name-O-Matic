@@ -180,13 +180,13 @@ namespace NameOMatic.Formats.DB2
             {
                 if (fileIds.Count == 1)
                 {
-                    if (!ListFile.Instance.ContainsKey(fileIds[0]) && !FileNames.ContainsKey(fileIds[0]))
+                    if (!ListFile.Instance.ContainsKey(fileIds[0]) && !FileNames.ContainsKey(fileIds[0]) && fileIds[i] > 1730233)
                         FileNames[fileIds[0]] = string.Format(template, "");
                 }
                 else
                 {
                     for (int i = 0; i < fileIds.Count; i++)
-                        if (!ListFile.Instance.ContainsKey(fileIds[i]) && !FileNames.ContainsKey(fileIds[i]))
+                        if (!ListFile.Instance.ContainsKey(fileIds[i]) && !FileNames.ContainsKey(fileIds[i]) && fileIds[i] > 1730233)
                             FileNames[fileIds[i]] = string.Format(template, $"_{i + 1:D2}");
                 }
             }
