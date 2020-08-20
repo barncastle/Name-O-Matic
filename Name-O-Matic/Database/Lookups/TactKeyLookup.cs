@@ -13,9 +13,9 @@ namespace NameOMatic.Database.Lookups
 
         protected override void ParseLine(string line)
         {
-            string[] parts = line.Split(';', 2);
+            string[] parts = line.Split(';');
 
-            if (ulong.TryParse(parts[0], NumberStyles.HexNumber, null, out var key))
+            if (ulong.TryParse(parts[0], NumberStyles.HexNumber, null, out var key) && !parts[1].Contains('?'))
                 this[key] = parts[1].ToByteArray();
         }
     }
