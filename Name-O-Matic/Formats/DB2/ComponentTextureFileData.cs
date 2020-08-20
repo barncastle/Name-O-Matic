@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NameOMatic.Constants;
@@ -25,6 +26,12 @@ namespace NameOMatic.Formats.DB2
         public ComponentTextureFileData() => FileNames = new Dictionary<int, string>();
 
         public void Enumerate()
+        {
+            EnumerateCollections();
+            EnumerateCapes();
+        }
+
+        private void EnumerateCollections()
         {
             var componentTextureFileData = DBContext.Instance["ComponentTextureFileData"];
             var textureFileData = DBContext.Instance["TextureFileData"];
@@ -75,6 +82,56 @@ namespace NameOMatic.Formats.DB2
                     continue;
 
                 FileNames[rec.FileDataId] = $"{path}{collection}_{slot}_{rec.Section}_{rec.Gender}{rec.TextureSuffix}.blp";
+            }
+        }
+
+        private void EnumerateCapes()
+        {
+            var componentTextureFileData = DBContext.Instance["ComponentTextureFileData"];
+            var textureFileData = DBContext.Instance["TextureFileData"];
+            var itemDisplayInfo = DBContext.Instance["ItemDisplayInfo"];
+            var itemAppearance = DBContext.Instance["ItemAppearance"];
+            var listfile = ListFile.Instance;
+
+            if (itemDisplayInfo == null)
+                return;
+
+            /*
+             * textureFileData.MaterialResourcesID -> itemDisplayInfo.ModelMaterialResourcesID[0]
+             * itemDisplayInfo.ID -> itemAppearance.ItemDisplayInfoID
+             *  where !listfile.contains(textureFileData.FileDataId) :: already named
+             *     && listfile.contains(itemAppearance.DefaultIconFileDataID) :: icon is named
+             *     && itemDisplayInfo.ModelResourcesID == 0 :: no model to parse
+             */
+            var temp = from tfd in textureFileData
+                       join idi in itemDisplayInfo on tfd.Value.FieldAs<int>("MaterialResourcesID") equals idi.Value.FieldAs<int[]>("ModelMaterialResourcesID")[0]
+                       join ia in itemAppearance on idi.Key equals ia.Value.FieldAs<int>("ItemDisplayInfoID")
+                       where !listfile.ContainsKey(tfd.Key) &&
+                             listfile.ContainsKey(ia.Value.FieldAs<int>("DefaultIconFileDataID")) &&
+                             idi.Value.FieldAs<int[]>("ModelResourcesID").All(x => x == 0)
+
+                       select new
+                       {
+                           FileDataId = tfd.Key,
+                           IconName = listfile[ia.Value.FieldAs<int>("DefaultIconFileDataID")]
+                       };
+
+            string icon;
+            foreach (var rec in temp.Unique(x => x.FileDataId))
+            {
+                if (!rec.IconName.Contains("cape"))
+                    continue;
+
+                // use the icon to guesstimate the name
+                icon = Path.GetFileNameWithoutExtension(rec.IconName);
+                if (icon.StartsWith("inv"))
+                    icon = icon[3..].TrimStart('_');
+                if (icon.EndsWith("cape"))
+                    icon = icon[0..^4];
+                if (!icon.StartsWith("cape"))
+                    icon = "cape_" + icon;
+
+                FileNames[rec.FileDataId] = $"item/objectcomponents/cape/{icon}_{rec.FileDataId}.blp".Replace("__", "_");
             }
         }
 
