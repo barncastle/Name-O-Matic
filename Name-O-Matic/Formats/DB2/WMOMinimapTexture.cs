@@ -9,15 +9,9 @@ namespace NameOMatic.Formats.DB2
 
         public bool IsValid => DBContext.Instance["WMOMinimapTexture"] != null;
 
-        private readonly HashSet<int> UnnamedRecordIDs;
-        private readonly Dictionary<int, string> WMONameMap;
-
         public WMOMinimapTexture()
         {
             FileNames = new Dictionary<int, string>();
-
-            UnnamedRecordIDs = new HashSet<int>(0x500);
-            WMONameMap = new Dictionary<int, string>(0x1000);
         }
 
         public void Enumerate()
