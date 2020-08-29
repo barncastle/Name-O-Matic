@@ -45,10 +45,10 @@ namespace NameOMatic.Database.Storage
 
             Console.WriteLine("Looking up root..");
             Repo.EncodingFile.TryGetCKeyEntry(Repo.ConfigContainer.RootCKey, out var rootCEntry);
-            RootEKey = rootCEntry.EKey.ToString();
+            RootEKey = rootCEntry.EKeys[0].ToString();
 
             Console.WriteLine("Loading root..");
-            Repo.RootFile = new TACT.Net.Root.RootFile(Repo.BaseDirectory, rootCEntry.EKey);
+            Repo.RootFile = new TACT.Net.Root.RootFile(Repo.BaseDirectory, rootCEntry.EKeys[0]);
 
             // store various build info
             var buildName = Repo.ConfigContainer.BuildConfig.GetValue("Build-Name");
