@@ -11,7 +11,7 @@ namespace NameOMatic.Database.Lookups
         public TactKeyLookup() : base(Path.Combine("Lookups", "TactKeyLookup.txt"))
         {
             Populate();
-            ScrapeWoWTools();
+            LoadFromGit();
         }
 
         protected override void ParseLine(string line)
@@ -22,17 +22,14 @@ namespace NameOMatic.Database.Lookups
                 this[key] = parts[1].ToByteArray();
         }
 
-        private void ScrapeWoWTools()
+        private void LoadFromGit()
         {
             var wc = new WebClient();
-            var source = wc.DownloadString("https://wow.tools/dbc/tactkey.php");
-            var regex = new Regex("\"keyname\":\"([A-F0-9]{16})\",\"keybytes\":\"([A-F0-9]{32})\"");
+            var source = wc.OpenRead("https://raw.githubusercontent.com/wowdev/TACTKeys/master/WoW.txt");
+            using var sr = new StreamReader(source);
 
-            foreach (Match match in regex.Matches(source))
-            {
-                if (match.Success && ulong.TryParse(match.Groups[1].Value, NumberStyles.HexNumber, null, out var key) && !match.Groups[2].Value.Contains('?'))
-                    this[key] = match.Groups[2].Value.ToByteArray();
-            }
+            while (!sr.EndOfStream)
+                ParseLine(sr.ReadLine().Replace(" ", ";"));
         }
     }
 }
