@@ -81,7 +81,7 @@ namespace NameOMatic.Formats.DB2
                 if (!SectionPaths.TryGetValue(rec.Section, out string path))
                     continue;
 
-                FileNames[rec.FileDataId] = $"{path}{collection}_{slot}_{rec.Section}_{rec.Gender}{rec.TextureSuffix}.blp";
+                FileNames[rec.FileDataId] = $"{path}{collection}_{slot}_{rec.Section}_{rec.Gender}{rec.TextureSuffix}.blp".Replace("__", "_");
             }
         }
 

@@ -60,7 +60,7 @@ namespace NameOMatic.Formats.DB2
                 foreach (var texture in rec.TextureFileIDs)
                 {
                     string suffix = TextureSuffix.Get(textureFileData[texture].FieldAs<int>("UsageType"));
-                    FileNames[texture] = $"{directoryAndPath}_{texture}{suffix}_{texture}.blp";
+                    FileNames[texture] = $"{directoryAndPath}_{texture}{suffix}.blp";
                 }
             });
         }
