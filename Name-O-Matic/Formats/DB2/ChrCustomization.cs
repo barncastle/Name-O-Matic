@@ -4,6 +4,7 @@ using System.Text;
 using System.Linq;
 using NameOMatic.Database;
 using NameOMatic.Extensions;
+using System.Text.RegularExpressions;
 
 namespace NameOMatic.Formats.DB2
 {
@@ -60,25 +61,52 @@ namespace NameOMatic.Formats.DB2
                            OrderIndex = cc.Value.FieldAs<int>("OrderIndex").ToString("D2"),
                        };
 
-            foreach (var rec in temp.Unique(x => x.FileDataId))
+            foreach (var records in temp.GroupBy(x => x.FileDataId))
             {
-                if (model.TryGetValue(rec.Model, out var modelrow))
-                    rec.Gender = modelrow.FieldAs<bool>("Sex") ? "female" : "male";
+                var entries = records.ToArray();
 
-                if (chrchoice.TryGetValue(rec.AltChoice, out var choicerow))
+                var result = new Record()
                 {
-                    rec.OrderIndex += "_" + choicerow.FieldAs<int>("OrderIndex").ToString("D2");
+                    FileDataId = entries[0].FileDataId
+                };
 
-                    if (chropt.TryGetValue(choicerow.FieldAs<int>("ChrCustomizationOptionID"), out var optrow))
+                for (var i = 0; i < entries.Length; i++)
+                {
+                    if ((result.Race ??= entries[i].Race) != entries[i].Race)
+                        result.Race = "";
+
+                    if (model.TryGetValue(entries[i].Model, out var modelrow))
                     {
-                        var option2 = optrow.Field<string>("Name_lang");
-                        if (!string.IsNullOrEmpty(option2))
-                            rec.Option = option2;
+                        var gender = modelrow.FieldAs<bool>("Sex") ? "female" : "male";
+                        if ((result.Gender ??= gender) != gender)
+                            result.Gender = "";
                     }
+                    else
+                    {
+                        result.Gender = "";
+                    }
+
+
+                    if (chrchoice.TryGetValue(entries[i].AltChoice, out var choicerow))
+                    {
+                        entries[i].OrderIndex += "_" + choicerow.FieldAs<int>("OrderIndex").ToString("D2");
+
+                        if (chropt.TryGetValue(choicerow.FieldAs<int>("ChrCustomizationOptionID"), out var optrow))
+                        {
+                            var option2 = optrow.Field<string>("Name_lang");
+                            if (!string.IsNullOrEmpty(option2))
+                                entries[i].Option = option2;
+                        }
+                    }
+
+                    if ((result.Option ??= entries[i].Option) != result.Option)
+                        result.Option = "";
+                    if ((result.OrderIndex ??= entries[i].OrderIndex) != result.OrderIndex)
+                        result.OrderIndex = "";
                 }
 
-                var filename = $"character/{rec.Race}/{rec.Gender}/{rec.Race}{rec.Gender}_{rec.Option}_{rec.OrderIndex}_{rec.FileDataId}.blp";
-                FileNames[rec.FileDataId] = filename.Replace("//", "/").Replace(" ", "_");
+                var filename = $"character/{result.Race}/{result.Gender}/{result.Race}{result.Gender}_{result.Option}_{result.OrderIndex}_{result.FileDataId}.blp";
+                FileNames[result.FileDataId] = filename.Replace("//", "/").Replace(" ", "_").Replace("__", "_");
             }
         }
 
@@ -91,7 +119,7 @@ namespace NameOMatic.Formats.DB2
             public int AltChoice { get; set; }
             public string Option { get; set; }
             public string OrderIndex { get; set; }
-            public string Gender { get; set; } = "";
+            public string Gender { get; set; }
         }
     }
 }
