@@ -92,6 +92,7 @@ namespace NameOMatic.Database
             ["LiquidType"] = 1371380,
             ["LiquidTypeXTexture"] = 2261065,
             ["ManifestInterfaceData"] = 1375801,
+            ["ManifestMP3"] = 1060964,
             ["Map"] = 1349477,
             ["ModelFileData"] = 1337833,
             ["Movie"] = 1332556,

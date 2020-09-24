@@ -6,6 +6,7 @@ using CommandLine;
 using NameOMatic.Database;
 using NameOMatic.Formats;
 using NameOMatic.Formats.DB2;
+using NameOMatic.Formats.MP3;
 using NameOMatic.Helpers.Collections;
 using NameOMatic.Helpers.WoWTools;
 
@@ -39,7 +40,8 @@ namespace NameOMatic
                 tokens.Merge(fileNamer.Tokens);
             }
 
-            // special case guaranteed to be correct
+            // special cases guaranteed to be correct
+            lookup.ReplaceRange(MP3Enumerator.Enumerate(diff));
             lookup.ReplaceRange(ManifestInterfaceData.Enumerate());
 
             // export
