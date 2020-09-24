@@ -14,9 +14,10 @@ namespace NameOMatic.Formats.DB2
     {
         public IDictionary<int, string> FileNames { get; }
 
-        public bool IsValid => DBContext.Instance["SoundKitName"] == null;
+        public bool IsValid => DBContext.Instance["SoundKitName"] == null || DBContext.Instance["ManifestMP3"] == null;
 
         private readonly SoundGlobalIndexer GlobalIndex;
+        private readonly HashSet<int> MP3FileIds;
         private readonly Dictionary<int, string> Races;
         private readonly Dictionary<int, string> Classes;
         private readonly IDBCDStorage CreatureSoundData;
@@ -27,6 +28,7 @@ namespace NameOMatic.Formats.DB2
             FileNames = new Dictionary<int, string>();
 
             GlobalIndex = SoundGlobalIndexer.Instance;
+            MP3FileIds = DBContext.Instance["ManifestMP3"].Keys.ToHashSet();
             Races = DBContext.Instance["ChrRaces"].ToDictionary(x => x.Key, x => x.Value.Field<string>("ClientFileString"));
             Classes = DBContext.Instance["ChrClasses"].ToDictionary(x => x.Key, x => x.Value.Field<string>("Filename"));
             CreatureSoundData = DBContext.Instance["CreatureSoundData"] as IDBCDStorage;
@@ -35,7 +37,7 @@ namespace NameOMatic.Formats.DB2
 
         public void Enumerate()
         {
-            this.GenerateCreatureSounds();
+            GenerateCreatureSounds();
             GenerateEmotesTextSound();
             GenerateVocalUISounds();
             GenerateEmitterSounds();
@@ -178,16 +180,15 @@ namespace NameOMatic.Formats.DB2
         {
             if (GlobalIndex.TryGetValue(soundKitID, out var fileIds))
             {
-                if (fileIds.Count == 1)
+                for (int i = 0; i < fileIds.Count; i++)
                 {
-                    if (!ListFile.Instance.ContainsKey(fileIds[0]) && !FileNames.ContainsKey(fileIds[0]) && fileIds[0] > 1730233)
-                        FileNames[fileIds[0]] = string.Format(template, "");
-                }
-                else
-                {
-                    for (int i = 0; i < fileIds.Count; i++)
-                        if (!ListFile.Instance.ContainsKey(fileIds[i]) && !FileNames.ContainsKey(fileIds[i]) && fileIds[i] > 1730233)
-                            FileNames[fileIds[i]] = string.Format(template, $"_{i + 1:D2}");
+                    if (!ListFile.Instance.ContainsKey(fileIds[i]) && !FileNames.ContainsKey(fileIds[i]) && fileIds[i] > 1730233)
+                    {
+                        FileNames[fileIds[i]] = string.Format(template, $"_{i + 1:D2}");
+
+                        if (MP3FileIds.Contains(fileIds[i]))
+                            FileNames[fileIds[i]] = Path.ChangeExtension(FileNames[fileIds[i]], ".mp3");
+                    }
                 }
             }
         }
