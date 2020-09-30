@@ -27,7 +27,7 @@ namespace NameOMatic.Formats.MP3
             diff.FileType = "mp3";
             foreach (var fileID in diff)
             {
-                if (!ListFile.Instance.Contains(fileID) && TryRead(fileID, out var title))
+                if (!ListFile.Instance.ContainsKey(fileID) && TryRead(fileID, out var title))
                     filenames.Add(fileID, title);
             }
 
