@@ -19,6 +19,9 @@ namespace NameOMatic.Helpers
             var request = (HttpWebRequest)base.GetWebRequest(address);
             if (!string.IsNullOrEmpty(Method))
                 request.Method = Method;
+
+            request.UserAgent = "Name-O-Matic/1.0 LOVE_DEATH_AND_MARTIN_BENJAMINS";
+
             request.AutomaticDecompression = AutomaticDecompression;
             return request;
         }
