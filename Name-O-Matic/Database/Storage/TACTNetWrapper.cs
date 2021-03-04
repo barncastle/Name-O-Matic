@@ -20,7 +20,7 @@ namespace NameOMatic.Database.Storage
         public Expansion Expansion { get; }
         public string RootEKey { get; }
 
-        private TACTRepo Repo;
+        private readonly TACTRepo Repo;
         private CHashLookup CHashLookup;
 
         public TACTNetWrapper(string path, string buildconfig, string cdnconfig)

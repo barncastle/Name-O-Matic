@@ -8,7 +8,7 @@ namespace NameOMatic.Helpers
     {
         public Stream StreamForTableName(string tableName, string build)
         {
-            if (DBContext.FileLookup.TryGetValue(tableName, out int fileId))
+            if (DBContext.Instance.TryGet(tableName, out int fileId))
                 if (FileContext.Instance.FileExists(fileId))
                     return FileContext.Instance.OpenFile(fileId);
 

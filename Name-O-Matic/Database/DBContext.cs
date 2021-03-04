@@ -55,7 +55,9 @@ namespace NameOMatic.Database
 
         public bool TryGet(string name, out IDBCDStorage storage) => DBSets.TryGetValue(name, out storage) && storage != null;
 
-        public static readonly Dictionary<string, int> FileLookup = new Dictionary<string, int>
+        public bool TryGet(string name, out int fileId) => FileLookup.TryGetValue(name, out fileId);
+
+        private static readonly Dictionary<string, int> FileLookup = new Dictionary<string, int>
         {
             ["AreaTable"] = 1353545,
             ["CharSections"] = 1365366,

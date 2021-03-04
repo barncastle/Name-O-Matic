@@ -1,10 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace NameOMatic.Database.Lookups
 {
     internal class CreatureNameLookup : BaseLookup<int, string>
     {
+        private readonly Regex Replacements = new Regex(@"[,'\\\/]+");
+
         public CreatureNameLookup() : base(Path.Combine("Lookups", "CreatureNameLookup.csv"))
         {
             Populate();
@@ -15,7 +18,7 @@ namespace NameOMatic.Database.Lookups
             string[] parts = line.Split(',', 3);
 
             if (int.TryParse(parts[0], out int id))
-                this[id] = parts[2];
+                this[id] = Replacements.Replace(parts[2], "");
         }
     }
 }
