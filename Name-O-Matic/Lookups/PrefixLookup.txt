@@ -200,3 +200,4 @@ ICECROWN_LAVAMAN;world/expansion02/doodads/icecrown/lava/
 9vl;world/expansion08/doodads/valkyr/
 9vm;world/expansion08/doodads/vampire/
 cape_special;item/objectcomponents/cape/
+collisionwallpvp01;world/generic/pvp/collisionwall/
