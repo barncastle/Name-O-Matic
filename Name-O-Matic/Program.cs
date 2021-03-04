@@ -45,8 +45,8 @@ namespace NameOMatic
             lookup.ReplaceRange(ManifestInterfaceData.Enumerate());
 
             // export
-            lookup.Export($"filenames_{FileContext.Instance.Build}_{DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")}.txt");
-            tokens.Export("Output", $"tokens_{FileContext.Instance.Build}_{DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")}.txt");
+            lookup.Export($"filenames_{FileContext.Instance.Build}_{DateTime.Now:yyyy-MM-dd HH-mm-ss}.txt");
+            tokens.Export("Output", $"tokens_{FileContext.Instance.Build}_{DateTime.Now:yyyy-MM-dd HH-mm-ss}.txt");
             Console.WriteLine($"Generated {lookup.Count} filenames");
             Console.WriteLine($"Found {tokens.Count} new tokens");
             Console.ReadLine();
