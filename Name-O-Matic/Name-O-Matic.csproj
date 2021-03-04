@@ -31,13 +31,13 @@
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.7.82" />
+    <PackageReference Include="TACT.Net" Version="1.0.0" />
     <PackageReference Include="TagLibSharp" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CascLib\CascLib\CascLib.csproj" />
     <ProjectReference Include="..\DBCD\DBCD\DBCD.csproj" />
-    <ProjectReference Include="..\TACT.Net\TACT.Net\TACT.Net.csproj" />
   </ItemGroup>
 
 </Project>
