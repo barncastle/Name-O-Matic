@@ -207,3 +207,4 @@ collisionwallpvp01;world/generic/pvp/collisionwall/
 test;test/
 warpstalker2;creature/warpstalker2/
 9mxt;world/expansion08/doodads/korthia/
+9pg;world/expansion08/doodads/progenitor/
