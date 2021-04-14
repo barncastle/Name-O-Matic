@@ -28,7 +28,7 @@ namespace NameOMatic.Helpers.WoWTools
             {
                 if (!Request())
                 {
-                    Console.WriteLine($"FileEnumerator {Filters} only parsed {Offset}/{Count}");
+                    ConsoleEx.WriteError($"FileEnumerator {Filters} only parsed {Offset}/{Count}");
                     break;
                 }                    
 

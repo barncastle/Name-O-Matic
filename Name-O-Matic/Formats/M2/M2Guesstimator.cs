@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NameOMatic.Database;
 using NameOMatic.Database.Lookups;
+using NameOMatic.Helpers;
 
 namespace NameOMatic.Formats.M2
 {
@@ -44,7 +45,7 @@ namespace NameOMatic.Formats.M2
             if (IsCreature(model))
                 return;
 
-            Console.WriteLine($"Directory not found :: {model.FileDataId} {model.InternalName}");
+            ConsoleEx.WriteWarning($"Directory not found :: {model.FileDataId} {model.InternalName}");
         }
 
         public void Dispose()

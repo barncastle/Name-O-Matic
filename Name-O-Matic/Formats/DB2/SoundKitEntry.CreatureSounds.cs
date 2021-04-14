@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NameOMatic.Database;
 using NameOMatic.Database.Lookups;
+using NameOMatic.Helpers;
 
 namespace NameOMatic.Formats.DB2
 {
@@ -55,7 +56,7 @@ namespace NameOMatic.Formats.DB2
             }
 
             if (unmappable.Count > 0)
-                Console.WriteLine($"\t\tNote: {unmappable.Count} CreatureDisplayIds were NOT mapped");
+                ConsoleEx.WriteWarning($"\t\tNote: {unmappable.Count} CreatureDisplayIds were NOT mapped");
         }
 
         #region Creature Sound Helpers
