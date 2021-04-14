@@ -28,6 +28,7 @@
         PFDC = 0x43444650,
         EDGF = 0x46474445,
         NERF = 0x4652454E,
+        DETL = 0x4C544544,
 
         // Skel
         SKL1 = 0x314C4B53,

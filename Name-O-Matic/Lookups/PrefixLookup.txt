@@ -156,6 +156,8 @@ sword;item/objectcomponents/weapon/
 thrown;item/objectcomponents/weapon/
 totem;item/objectcomponents/weapon/
 wand;item/objectcomponents/weapon/
+guillotine;item/objectcomponents/weapon/
+shuriken;item/objectcomponents/weapon/
 xmas;item/objectcomponents/scroll/
 tradeskill_alchemycauldron;world/skillactivated/tradeskillenablers/
 tradeskill_alchemyset;world/skillactivated/tradeskillenablers/
@@ -183,7 +185,7 @@ backpack;item/objectcomponents/backpack/
 fogvolume;eironments/fogvolumes/
 8bl;world/expansion07/doodads/blackempire/
 8nzo;world/expansion07/doodads/nzothraid/
-ICECROWN_LAVAMAN;world/expansion02/doodads/icecrown/lava/
+icecrown_lavaman;world/expansion02/doodads/icecrown/lava/
 9xp;world/expansion08/doodads/
 9ard;world/expansion08/doodads/ardenweald/
 9pln;world/expansion08/doodads/babylonzone/
@@ -201,3 +203,7 @@ ICECROWN_LAVAMAN;world/expansion02/doodads/icecrown/lava/
 9vm;world/expansion08/doodads/vampire/
 cape_special;item/objectcomponents/cape/
 collisionwallpvp01;world/generic/pvp/collisionwall/
+9ori;world/expansion08/doodads/oribos/
+test;test/
+warpstalker2;creature/warpstalker2/
+9mxt;world/expansion08/doodads/korthia/
