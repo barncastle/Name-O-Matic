@@ -26,7 +26,11 @@ namespace NameOMatic.Helpers.WoWTools
         {
             do
             {
-                Request();
+                if (!Request())
+                {
+                    Console.WriteLine($"FileEnumerator {Filters} only parsed {Offset}/{Count}");
+                    break;
+                }                    
 
                 foreach (var record in Data)
                     if (!IsEncrypted(record))
@@ -39,7 +43,7 @@ namespace NameOMatic.Helpers.WoWTools
 
         public void Reset() => Offset = 0;
 
-        private void Request()
+        private bool Request()
         {
             string url = string.Format(Endpoints.FilesAPI, Offset, Filters, DateTime.Now.Ticks).ToLowerInvariant();
             string data = _client.DownloadString(url);
@@ -50,6 +54,7 @@ namespace NameOMatic.Helpers.WoWTools
 
             Data = token["data"].Value<JArray>();
             Offset += Data.Count;
+            return Data.Count > 0;
         }
 
         private bool IsEncrypted(JToken record)
