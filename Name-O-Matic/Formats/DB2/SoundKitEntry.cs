@@ -184,6 +184,9 @@ namespace NameOMatic.Formats.DB2
                 {
                     if (!ListFile.Instance.ContainsKey(fileIds[i]) && !FileNames.ContainsKey(fileIds[i]) && fileIds[i] > 1730233)
                     {
+                        if (!FileContext.Instance.FileExists(fileIds[i]))
+                            continue;
+
                         FileNames[fileIds[i]] = string.Format(template, $"_{i + 1:D2}");
 
                         if (MP3FileIds.Contains(fileIds[i]))
