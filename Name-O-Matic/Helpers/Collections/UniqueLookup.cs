@@ -9,6 +9,8 @@ namespace NameOMatic.Helpers.Collections
 {
     internal class UniqueLookup<TKey, TValue> : ILookup<TKey, TValue>
     {
+        protected IReadOnlyDictionary<TKey, IEnumerable<TValue>> Data => _dictionary;
+
         private readonly ConcurrentDictionary<TKey, IEnumerable<TValue>> _dictionary;
         private readonly IEqualityComparer<TValue> _valueComparer;
 
@@ -72,6 +74,7 @@ namespace NameOMatic.Helpers.Collections
             Directory.CreateDirectory(directory);
 
             using var fs = File.CreateText(Path.Combine("Output", filename));
+
             foreach (var entry in this.OrderBy(x => x.Key))
             {
                 var value = valueFormatter != null ? valueFormatter.Invoke(entry.First()) : entry.First().ToString();
@@ -83,9 +86,16 @@ namespace NameOMatic.Helpers.Collections
 
         IEnumerator<IGrouping<TKey, TValue>> IEnumerable<IGrouping<TKey, TValue>>.GetEnumerator() => GetEnumeratorInternal();
 
+        /// <summary>
+        /// Returns items without conflicting names
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator<IGrouping<TKey, TValue>> GetEnumeratorInternal()
         {
-            return _dictionary.Where(x => x.Value.Count() == 1).Select(x => new Grouping(x)).GetEnumerator();
+            return _dictionary
+                .Where(x => x.Value.Count() == 1)
+                .Select(x => new Grouping(x))
+                .GetEnumerator();
         }
 
         private IEnumerable<TValue> AddMethod(TValue value)

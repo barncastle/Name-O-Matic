@@ -46,6 +46,7 @@ namespace NameOMatic
 
             // export
             lookup.Export($"filenames_{FileContext.Instance.Build}_{DateTime.Now:yyyy-MM-dd HH-mm-ss}.txt");
+            lookup.Dump($"dump_{FileContext.Instance.Build}_{DateTime.Now:yyyy-MM-dd HH-mm-ss}.txt");
             tokens.Export("Output", $"tokens_{FileContext.Instance.Build}_{DateTime.Now:yyyy-MM-dd HH-mm-ss}.txt");
             Console.WriteLine($"Generated {lookup.Count} filenames");
             Console.WriteLine($"Found {tokens.Count} new tokens");
