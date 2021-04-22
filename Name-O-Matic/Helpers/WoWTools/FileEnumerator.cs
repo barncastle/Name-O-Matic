@@ -54,7 +54,7 @@ namespace NameOMatic.Helpers.WoWTools
 
             Data = token["data"].Value<JArray>();
             Offset += Data.Count;
-            return Data.Count > 0;
+            return Data.Count > 0 || Count == 0;
         }
 
         private bool IsEncrypted(JToken record)
